@@ -25,6 +25,7 @@ class Color(models.Model):
 
 class Filter_Price(models.Model):
     Filter_Price = (
+
         ('100 TO 1000', '1000 TO 2000'),
         ('200 TO 3000', '3000 TO 4000'),
         ('4000 TO 10000', '10000 To 30000'),
@@ -46,9 +47,10 @@ class Product(models.Model):
     status = models.CharField(choices=STATUS,max_length=200)
     added_date = models.DateTimeField(default=timezone.now)
 
+
     categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE)
     color = models.ForeignKey(Color, on_delete=models.CASCADE)
-    filter_price = models.ForeignKey(Filter_Price,on_delete=models.CASCADE)
+    filter_price = models.ForeignKey(Filter_Price, on_delete=models.CASCADE)
 
 
 
