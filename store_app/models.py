@@ -43,8 +43,8 @@ class Product(models.Model):
     name = models.CharField(max_length=60)
     price = models.FloatField()
     description = models.CharField(max_length=500)
-    stock = models.CharField(choices= STOCK,max_length=200)
-    status = models.CharField(choices=STATUS,max_length=200)
+    stock = models.CharField(choices=STOCK, max_length=200)
+    status = models.CharField(choices=STATUS, max_length=200)
     added_date = models.DateTimeField(default=timezone.now)
 
 

@@ -428,7 +428,9 @@ body {
 
 @media screen and (max-width: 767px) {
   .bordernosm {
-    border: 0px !important;
+    border: 0px !impo
+
+    rtant;
   }
 }
 
