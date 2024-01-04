@@ -12,3 +12,13 @@ def HOME(request):
     }
 
     return render(request, 'main/index.html', context)
+
+
+def product(request):
+
+    products = Product.objects.all()
+
+    context = {
+        'products': products,
+    }
+    return render(request, 'main/product.html', context)
