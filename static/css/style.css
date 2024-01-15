@@ -266,6 +266,14 @@ header {
   display: block;
 }
 
+/* Merged styles from the previous code */
+
+.featured img {
+  width: 100%;
+  max-height: 450px;
+  object-fit: cover;
+}
+
 
 @media only screen and (max-width: 1200px) {
   .section-p1 {
@@ -298,22 +306,142 @@ header {
   .nav2 .nav2-left {
     text-align: center;
   }
+}
+/* Add this to your custom CSS file */
 
-
-
-
-
-.featured {
+.latest-products-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 300px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 20px 0; /* Adjust the padding as needed */
 }
 
-.featured img {
+.product-card {
+    flex: 0 0 auto;
+    margin-right: 20px; /* Adjust the margin as needed */
+    width: calc(33.3333% - 20px); /* Adjust the width as needed */
+}
+
+.product-bg {
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-detail {
+    padding: 15px;
+}
+
+.product-detail h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.product-detail b {
+    font-size: 1.5rem;
+    color: #d9534f;
+}
+
+.vgth li {
+    font-size: 0.8rem;
+}
+
+.float-end.gvi i {
+    font-size: 1.5rem;
+    color: #d9534f;
+}
+
+.product-detail button {
+    font-size: 1rem;
+}
+
+/* Responsive adjustments for horizontal layout */
+@media (max-width: 1200px) {
+    .product-card {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .product-card {
+        width: calc(100% - 20px);
+        margin-right: 0;
+    }
+}
 
 
-    width:100%;
-    height:auto;
+/* Add this to your custom CSS file */
+
+.latest-products-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 20px 0; /* Adjust the padding as needed */
+}
+
+.product-card {
+    flex: 0 0 auto;
+    margin-right: 20px; /* Adjust the margin as needed */
+    width: calc(33.3333% - 20px); /* Adjust the width as needed */
+    height: 350px; /* Set a fixed height for uniformity */
+    overflow: hidden;
+}
+
+.product-bg {
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-detail {
+    height: 100%; /* Ensure the details fill the entire height */
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-detail h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.product-detail b {
+    font-size: 1.5rem;
+    color: #d9534f;
+}
+
+.vgth li {
+    font-size: 0.8rem;
+}
+
+.float-end.gvi i {
+    font-size: 1.5rem;
+    color: #d9534f;
+}
+
+.product-detail button {
+    font-size: 1rem;
+}
+
+/* Responsive adjustments for horizontal layout */
+@media (max-width: 1200px) {
+    .product-card {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .product-card {
+        width: calc(100% - 20px);
+        margin-right: 0;
+    }
+}
+/* Add this to your custom CSS file */
+
+.product-card img {
+    width: 150px;
+    max-height: 100px; /* Adjust the max height as needed */
     object-fit: cover;
 }
+

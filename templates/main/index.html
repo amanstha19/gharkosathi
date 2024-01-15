@@ -5,89 +5,61 @@
 {% load static %}
 
 <div class="featured">
-     <img src="{% static 'img.jpeg' %}" alt="">
-    
+    <img src="{% static 'images/img.jpg' %}" alt="">
 </div>
-
-
-
-
 
 <div class="latest-products pt-5 pb-0">
     <div class="container-xl">
         <div class="section-tile row">
             <div class="col-md-10 text-center mx-auto">
                 <h2>Featured Products</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet est sit amet sem malesuada
-                    bibendum. Nulla eget mauris at dolor fermentum blandit. Maecenas</p>
+                <p> Some of our product</p>
             </div>
         </div>
-       
-        <div class="row mt-5">
-             {% for product_item in products %}
-            <div class="col-lg-3 col-md-4 mb-4">
-                <div class="bg-white p-2 shadow-md">
+
+
+
+<div class="latest-products-container">
+    {% for product_item in products %}
+        <div class="product-card">
+            <div class="product-bg">
+                <div class="product-detail">
                     <div class="text-center">
                         <a href="detail.html">
-                            <img src=   "{{product_item.image}}" alt="">
+                            <img src="{{ product_item.image }}" alt="{{ product_item.name }}">
                         </a>
                     </div>
-                    <div class="detail p-2">
-                        <h4 class="mb-1 fs-5 fw-bold">{{product_item.name |truncatechars:40}}</h4>
-                        <b class="fs-4 text-danger">{{product_item.price }}</b>
-                        
-
-                        <ul class="mt-0 vgth">
-                            <li class="fs-8">
-                                <i class="bi text-warning bi-star-fill"></i>
-                                <i class="bi text-warning bi-star-fill"></i>
-                                <i class="bi text-warning bi-star-fill"></i>
-                                <i class="bi text-warning bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                            </li>
-                            <li class="float-end gvi">
-                                <i class="bi text-danger bi-heart-fill"></i>
-                            </li>
-                        </ul>
-                        <div class="row pt-2">
-                            <div class="col-md-6">
-                                <a href="detail.html">
-                                    <button class="btn mb-2 fw-bold w-100 btn-danger">Buy Now</button>
-                                </a>
-                            </div>
-                            <div class="col-md-6">
-                                <button class="btn fw-bold w-100 btn-outline-danger">Add to Cart</button>
-                            </div>
+                    <h4 class="mb-1 fs-5 fw-bold">{{ product_item.name | truncatechars:40 }}</h4>
+                    <b class="fs-4 text-danger">{{ product_item.price }}</b>
+                    <ul class="mt-0 vgth">
+                        <li class="fs-8">
+                            <i class="bi text-warning bi-star-fill"></i>
+                            <i class="bi text-warning bi-star-fill"></i>
+                            <i class="bi text-warning bi-star-fill"></i>
+                            <i class="bi text-warning bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </li>
+                        <li class="float-end gvi">
+                            <i class="bi text-danger bi-heart-fill"></i>
+                        </li>
+                    </ul>
+                    <div class="row pt-2">
+                        <div class="col-md-6">
+                            <a href="detail.html">
+                                <button class="btn mb-2 fw-bold w-100 btn-danger">Buy Now</button>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn fw-bold w-100 btn-outline-danger">Add to Cart</button>
                         </div>
                     </div>
                 </div>
-            </div>  {% endfor %}
-        </div>
-    </div>
-</div>
-
-
-<div class="ad-cover container-fluid pb-4">
-    <div class="container-lg">
-        <div class="row">
-        
-        </div>
-    </div>
-</div>
-
-<div class="popular-brands big-padding bg-white container-fluid">
-    <div class="container">
-        <div class="section-tile row">
-            <div class="col-md-10 text-center mx-auto">
-                <h2>Popular Brands</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet est sit amet sem malesuada
-                    bibendum. Nulla eget mauris at dolor fermentum blandit. Maecenas</p>
             </div>
         </div>
-        <div class="row pt-5">
-            <!-- ... your brand images ... -->
-        </div>
-    </div>
+    {% endfor %}
 </div>
+
+
+
 
 {% endblock %}
