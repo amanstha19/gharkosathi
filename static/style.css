@@ -85,7 +85,7 @@ header {
   text-align: center;
   background-color: rgb(192, 192, 245);
   align-items: center;
-  padding: 10px 20px; /* Added padding for better spacing */
+  padding: 10px 20px;
 }
 
 .nav1 .img {
@@ -266,16 +266,16 @@ header {
   display: block;
 }
 
-/* Media Queries for Responsiveness */
+
 @media only screen and (max-width: 1200px) {
   .section-p1 {
-    padding: 40px 40px; /* Adjusted padding for smaller screens */
+    padding: 40px 40px;
   }
 }
 
 @media only screen and (max-width: 768px) {
   .section-p1 {
-    padding: 40px 20px; /* Further adjusted padding for smaller screens */
+    padding: 40px 20px;
   }
 
   .nav1 .img {
@@ -299,7 +299,7 @@ header {
     text-align: center;
   }
 
-  /* Add your existing styles above */
+
 
 .featured {
 
