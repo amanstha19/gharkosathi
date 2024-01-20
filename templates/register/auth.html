@@ -1,0 +1,58 @@
+{% extends 'main/base.html' %}
+ {% block content %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <script src="{% static 'js/scripts.js' %}"></script>
+  <title>Login or Register</title>
+</head>
+<body>
+
+  <h2>Choose an option:</h2>
+
+  <div class="options">
+    <input type="radio" name="userOption" id="loginRadio" checked>
+    <label for="loginRadio" onclick="showForm('login')">Login</label>
+    
+    <input type="radio" name="userOption" id="registerRadio">
+    <label for="registerRadio" onclick="showForm('register')">Register</label>
+  </div>
+
+  <div class="login-form">
+    <h3>Login Form</h3>
+    <form>
+      
+      
+      <input type="text" placeholder="Username">
+      <input type="password" placeholder="Password">
+      <input type="submit" value="Login">
+    </form>
+  </div>
+
+  <div class="register-form">
+    <h3>Registration Form</h3>
+    <form action="{% url 'register' %}" method="post">
+       {% csrf_token %}
+      <input type="text" name="username" placeholder="Username" />
+        <input type="text" name="first_name" placeholder="First Name" />
+        <input type="text" name="last_name" placeholder="Last Name" />
+        <input type="text" name="username" placeholder="Username" />
+        <input  name="user-email" placeholder="Email" type="email" />
+        <input type="password" name="pass1" placeholder="Password"/>
+        <input type="password" name="pass2" placeholder="Confirm Password"/>
+        
+      <input type="submit" value="Register">
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
+   {% endblock %}

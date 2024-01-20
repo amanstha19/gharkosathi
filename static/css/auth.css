@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+body {
+  font-family: 'Spartan', Arial, sans-serif;
+  text-align: center;
+  margin-top: 50px;
+  background-color: #f0f7fc;  /* Light blue background color */
+}
+
+.options {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+label {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #3498db;  /* Blue button background color */
+  color: #fff;  /* White text color */
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+label:hover {
+  background-color: #2980b9;  /* Darker blue on hover */
+}
+
+.login-form,
+.register-form {
+  display: none;
+  margin-top: 20px;
+}
+
+.login-form h3,
+.register-form h3 {
+  color: #3498db;  /* Blue heading color */
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"],
+.login-form input[type="submit"],
+.register-form input[type="text"],
+.register-form input[type="password"],
+.register-form input[type="submit"] {
+  display: block;
+  margin: 10px auto;
+  padding: 8px;
+  width: 80%;
+  box-sizing: border-box;
+}
+
+.login-form input[type="submit"],
+.register-form input[type="submit"] {
+  background-color: #3498db;  /* Blue submit button background color */
+  color: #fff;  /* White text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-form input[type="submit"]:hover,
+.register-form input[type="submit"]:hover {
+  background-color: #2980b9;  /* Darker blue on hover */
+}

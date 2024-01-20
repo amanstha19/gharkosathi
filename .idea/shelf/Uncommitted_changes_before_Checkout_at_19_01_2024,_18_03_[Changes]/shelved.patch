@@ -1,0 +1,19 @@
+Index: store_app/models.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from django.db import models\nfrom django.utils import timezone\n# Create your models here.\n\nclass Categorie(models.Model):\n\n    model_name = models.CharField(max_length=200)\n\n    def __str__(self):\n        return self.model_name\n\n\n\n\n\nclass Color(models.Model):\n    name = models.CharField(max_length=200)\n    code = models.CharField(max_length=50)\n\n    def __str__(self):\n        return self.name\n\n\n\n\nclass Filter_Price(models.Model):\n    Filter_Price = (\n\n        ('100 TO 1000', '1000 TO 2000'),\n        ('200 TO 3000', '3000 TO 4000'),\n        ('4000 TO 10000', '10000 To 30000'),\n\n    )\n    price = models.CharField(choices=Filter_Price,max_length= 90)\n\n\n\nclass Product(models.Model):\n    STOCK =('IN STOCK', 'IN STOCK'), ('OUT OF STOCK', 'OUT OF STOCK')\n    STATUS =('Publish', 'Publish'), ('DRAFT', 'DRAFT')\n    unique_id = models.CharField(unique=True, max_length=200, null=True, blank=True)\n    image = models.ImageField(upload_to='Product_images/img')\n    name = models.CharField(max_length=60)\n    price = models.FloatField()\n    description = models.CharField(max_length=500)\n    stock = models.CharField(choices=STOCK, max_length=200)\n    status = models.CharField(choices=STATUS, max_length=200)\n    added_date = models.DateTimeField(default=timezone.now)\n\n\n    categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE)\n    color = models.ForeignKey(Color, on_delete=models.CASCADE)\n    filter_price = models.ForeignKey(Filter_Price, on_delete=models.CASCADE)\n\n\n\n    def save(self,*args, **kwargs):\n        if self.unique_id is None and self.added_date and self.id:\n            self.unique_id = self.added_date.strftime('75%Y%m%d23') + str(self.id)\n\n        return super().save(*args, **kwargs)\n\n\n\n\nclass images(models.Model):\n    image = models.ImageField(upload_to='Product_images/img')\n    product = models.ForeignKey(Product, on_delete=models.CASCADE)\n\n\nclass tag(models.Model):\n    name = models.CharField(max_length=200)\n    product = models.ForeignKey(Product, on_delete=models.CASCADE)\n\n    def __str__(self):\n        return self.name\n\n\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/store_app/models.py b/store_app/models.py
+--- a/store_app/models.py	(revision 6f594443f1c1af4d477e17619002bf551817eca9)
++++ b/store_app/models.py	(date 1705666588612)
+@@ -31,7 +31,7 @@
+         ('4000 TO 10000', '10000 To 30000'),
+ 
+     )
+-    price = models.CharField(choices=Filter_Price,max_length= 90)
++    price = models.CharField(choices=Filter_Price, max_length= 90)
+ 
+ 
+ 
