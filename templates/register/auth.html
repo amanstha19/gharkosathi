@@ -1,58 +1,91 @@
-{% extends 'main/base.html' %}
- {% block content %}
 
-{% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{% static 'css/auth.css' %}">
-    <script src="{% static 'js/scripts.js' %}"></script>
-  <title>Login or Register</title>
-</head>
-<body>
+{% block content %}
+    {% load static %}
 
-  <h2>Choose an option:</h2>
+    <!DOCTYPE html>
+    <html lang="en">
 
-  <div class="options">
-    <input type="radio" name="userOption" id="loginRadio" checked>
-    <label for="loginRadio" onclick="showForm('login')">Login</label>
-    
-    <input type="radio" name="userOption" id="registerRadio">
-    <label for="registerRadio" onclick="showForm('register')">Register</label>
-  </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+        <script src="{% static 'js/scripts.js' %}"></script>
+        <title>Login or Register</title>
+    </head>
 
-  <div class="login-form">
-    <h3>Login Form</h3>
-    <form>
-      
-      
-      <input type="text" placeholder="Username">
-      <input type="password" placeholder="Password">
-      <input type="submit" value="Login">
-    </form>
-  </div>
+    <body>
 
-  <div class="register-form">
-    <h3>Registration Form</h3>
-    <form action="{% url 'register' %}" method="post">
-       {% csrf_token %}
-      <input type="text" name="username" placeholder="Username" />
-        <input type="text" name="first_name" placeholder="First Name" />
-        <input type="text" name="last_name" placeholder="Last Name" />
-        <input type="text" name="username" placeholder="Username" />
-        <input  name="user-email" placeholder="Email" type="email" />
-        <input type="password" name="pass1" placeholder="Password"/>
-        <input type="password" name="pass2" placeholder="Confirm Password"/>
-        
-      <input type="submit" value="Register">
-    </form>
-  </div>
+        <div class="container" id="container">
+            <div class="form-container sign-up">
 
-  <script src="script.js"></script>
+                <form action="{% url 'register' %}" method="post">
+                    {% csrf_token %} <!-- Include CSRF token -->
+                    <h1>Create Account</h1>
 
-</body>
-</html>
-   {% endblock %}
+                    <div class="social-icons">
+                        <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                        <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                    <span>or use your email for registration</span>
+
+                    <input type="text" name="username" placeholder="Username" />
+                    <input type="text" name="first_name" placeholder="First Name" />
+                    <input type="text" name="last_name" placeholder="Last Name" />
+                    <input type="text" name="username" placeholder="Username" />
+                    <input name="user-email" placeholder="Email" type="email" />
+                    <input type="password" name="pass1" placeholder="Password" />
+                    <input type="password" name="pass2" placeholder="Confirm Password" />
+
+                    <button type="submit" value="Register">Sign Up</button>
+                </form>
+            </div>
+            <div class="form-container sign-in">
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    <h1>Sign In</h1>
+                    <div class="social-icons">
+                        <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                        <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                    <span>or use your email password</span>
+                    <input type="text" name="username" placeholder="Username">
+                    <input type="password"  name="password" placeholder="Password">
+                    <a href="#">Forget Your Password?</a>
+                    <button type="submit" value="Login">Sign In</button>
+                </form>
+            </div>
+            <div class="toggle-container">
+                <div class="toggle">
+                    <div class="toggle-panel toggle-right">
+                        <h1>Hello, Friend!</h1>
+                        <p>Register with your personal details to use all site features</p>
+                        <button class="hidden" id="register">Sign Up</button>
+                    </div>
+                    <div class="toggle-panel toggle-left">
+                        <h1>Welcome!</h1>
+                        <p>Register your details to use all site features</p>
+                        <button class="hidden" id="login">Sign In</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const container = document.getElementById('container');
+            const registerBtn = document.getElementById('register');
+            const loginBtn = document.getElementById('login');
+
+            registerBtn.addEventListener('click', () => {
+                container.classList.add("active");
+            });
+
+            loginBtn.addEventListener('click', () => {
+                container.classList.remove("active");
+            });
+        </script>
+    </body>
+
+    </html>
+
+{% endblock %}
