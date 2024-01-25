@@ -36,26 +36,25 @@ def register(request):
         pass2 = request.POST.get('pass2')
 
         try:
-            # Ensure that the email is unique
+
             User.objects.get(email=email)
             return render(request, 'register/auth.html', {'error_message': 'Email address is already in use'})
         except User.DoesNotExist:
-            # The email is not in use, proceed with registration
+
             if pass1 != pass2:
                 return render(request, 'register/auth.html', {'error_message': 'Passwords do not match'})
 
-            # Set a dummy username or use the email as the username
-            # You can customize this logic based on your requirements
-            if not username:
-                username = email.split('@')[0]  # Use the part before '@' as the username
 
-            # Create the user with email as the authentication method
+            if not username:
+                username = email.split('@')[0]
+
+
             customer = User.objects.create_user(username, email, pass1)
             customer.first_name = first_name
             customer.last_name = last_name
             customer.save()
 
-            # Add email verification logic here (send confirmation email, etc.)
+
 
             return redirect('register')
 
@@ -71,3 +70,12 @@ def user_login(request):
             return redirect('home')
         else:
             return render(request, 'register/auth.html', {'error_message': 'Invalid login credentials'})
+
+
+
+def user_logout(request):
+    logout(request)
+
+    return render(request, 'register/auth.html')
+
+

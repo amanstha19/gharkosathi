@@ -23,14 +23,16 @@
         
         <nav class="nav1">
         
-            
-           
             <div class="left">
-            
-                 <h6><a href="{% url 'auth' %}">Login and register</a></h6>
-                   
-                </div>
-               
+    {% if user.is_authenticated %}
+        <h6><a href="{% url 'logout' %}">Logout</a></h6>
+    {% else %}
+        <h6><a href="{% url 'auth' %}">Login and register</a></h6>
+    {% endif %}
+</div>
+
+           
+           
             </div>
             <div class="right">
                 <i class="fa fa-facebook"></i>
