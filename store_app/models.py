@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.core.validators import EmailValidator
+from django.core.exceptions import ValidationError
 
 class Categorie(models.Model):
     model_name = models.CharField(max_length=200)
@@ -56,3 +58,11 @@ class tag(models.Model):
 
     def __str__(self):
       return self.name
+
+class CustomUser(models.Model):
+    email = models.EmailField(unique=True, validators=[EmailValidator(message="Enter a valid email address.")])
+
+    def clean(self):
+        email_exists = CustomUser.objects.exclude(pk=self.pk).filter(email=self.email).exists()
+        if email_exists:
+            raise ValidationError({'email': 'This email address is already in use.'})
