@@ -1,6 +1,8 @@
 from django.contrib import admin
 from .models import *
-# Register your models here.
+from django.contrib.admin import ModelAdmin, register
+
+
 
 class imagesTabularInline(admin.TabularInline):
     model = images

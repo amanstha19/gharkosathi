@@ -13,7 +13,9 @@
         <div class="section-tile row">
             <div class="col-md-10 text-center mx-auto">
                 <h2>Featured Products</h2>
-                <p> Some of our product</p>
+                <div> </div>
+                
+              
             </div>
         </div>
 
@@ -29,7 +31,7 @@
                             <img src="{{ product_item.image }}" alt="{{ product_item.name }}">
                         </a>
                     </div>
-                    <h4 class="mb-1 fs-5 fw-bold">{{ product_item.name | truncatechars:40 }}</h4>
+                    <h4 class="mb-1 fs-5 fw-bold">{{ product_item.name | truncatechars:20 }}</h4>
                     <b class="fs-4 text-danger">{{ product_item.price }}</b>
                     <ul class="mt-0 vgth">
                         <li class="fs-8">
