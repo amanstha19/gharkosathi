@@ -16,6 +16,7 @@ urlpatterns = [
     path('main/register/auth/', AuthView.as_view(), name='auth'),
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),
+    path('search/', views.search, name='search'),
 
 ]
 

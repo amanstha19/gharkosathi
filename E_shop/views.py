@@ -77,3 +77,15 @@ def user_logout(request):
     return redirect('home')
 
 
+def search(request):
+    query = request.GET.get('search')
+    products = Product.objects.filter(name__icontains=query)
+
+    context = {
+        'products': products,
+    }
+
+
+
+    return render(request, 'main/search.html', context)
+
