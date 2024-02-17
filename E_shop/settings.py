@@ -31,16 +31,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'material',
-    'material.admin',
 
+    'jazzmin',
+    'django.contrib.admin',  # Listed only once
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'store_app',
-
 ]
 
 MIDDLEWARE = [

@@ -72,12 +72,14 @@
                 <li><a href=""><i class="fa fa-home"></i>Home </a></li>
                 <li>
                     <a href="{% url 'product' %}"><i class="fa fa-male"></i> Categories</a>
-
                   
                 </li>
+                <li><a href=""><i class=""></i>Help</a></li>
+                <li><a href=""><i class=""></i>About us </a></li>
+                
                
                {% for category in categories %}
-           <li><a href="{% url 'product' category.id %}"><i class="fa fa-home"></i>{{ category.model_name }}</a></li>
+           <li><a href="{% url 'product' category.id %}"><i class=""></i>{{ category.model_name }}</a></li>
              {% endfor %}
 
             </ul>

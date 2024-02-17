@@ -7,6 +7,8 @@ from django.conf.urls.static import static
 from .views import AuthView
 
 urlpatterns = [
+
+
     
     path('admin/', admin.site.urls),
     path('', views.HOME, name='home'),
