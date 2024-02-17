@@ -67,41 +67,25 @@
         </nav>
 
         <!-- naya nav suru hunxa yaha bata -->
-
-        <nav class="nav3">
+<nav class="nav3">
             <ul>
-                <li><a href="#"><i class="fa fa-home"></i>Home </a></li>
-               
-               
-                <li><a href="#"><i class="fa fa-male"></i> Fashion</a>
-                    <ul>
-                        <li> <a href="#"> <i class="fa fa-shoe"> Shoes</i></a></li>
-                        <li> <a href="#"> <i class="fa fa-cloth"> Cloathing</i></a></li>
-                        <li> <a href="#"> <i class="fa fa-clipboard">Accessories </i></a></li>
-                    </ul>
+                <li><a href=""><i class="fa fa-home"></i>Home </a></li>
+                <li>
+                    <a href="{% url 'product' %}"><i class="fa fa-male"></i> Categories</a>
+
                   
                 </li>
                
-                <li><a href="#"><i class="fa fa-health"></i>Health & Beauty</a></li>
-                <li><a href="#"><i class="fa fa-users"></i>Accessories</a></li>
-                
-                
-                <li><a href="#"><i class="fa fa-child"></i>kids items</a>
-                    <ul>
-                        <li> <a href="#"> <i class="fa fa-shoe"> Shoes</i></a></li>
-                        <li> <a href="#"> <i class="fa fa-cloth"> Cloathing</i></a></li>
-                        <li> <a href="#"> <i class="fa fa-clipboard">Accessories </i></a></li>
-                    </ul>
-                 </li>
+               {% for category in categories %}
+           <li><a href="{% url 'product' category.id %}"><i class="fa fa-home"></i>{{ category.model_name }}</a></li>
+             {% endfor %}
+
             </ul>
-
-
         </nav>
-
-
 
     </header>
   <body>
+  
     {% block content %}
 
 

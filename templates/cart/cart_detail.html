@@ -1,0 +1,53 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add to Cart Example</title>
+</head>
+<body>
+  <div class="product" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; background-color: #f9f9f9;">
+    <h2>Product Name</h2>
+    <p>Description of the product.</p>
+    <p>Price: ₹750.00</p>
+    <button id="add-to-cart-btn" style="padding: 5px 10px; background-color: #007bff; color: #fff; border: none; cursor: pointer;">Add to Cart</button>
+  </div>
+  <div id="cart" style="border: 1px solid #ccc; padding: 10px; margin-top: 20px; background-color: #f9f9f9;">
+    <h2>Cart</h2>
+    <ul id="cart-items" style="list-style-type: none; padding: 0;"></ul>
+    <p>Total: <span id="cart-total">₹0.00</span></p>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const addToCartBtn = document.getElementById('add-to-cart-btn');
+      const cartItemsList = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
+
+      let totalPrice = 0;
+
+      addToCartBtn.addEventListener('click', function() {
+        const productName = "Product Name"; // You can fetch this dynamically
+        const productPrice = 750.00; // You can fetch this dynamically
+        const listItem = document.createElement('li');
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.style.marginLeft = '10px';
+        deleteButton.onclick = function() {
+          cartItemsList.removeChild(listItem);
+          totalPrice -= productPrice;
+          cartTotal.textContent = `₹${totalPrice.toFixed(2)}`;
+        };
+        listItem.textContent = `${productName} - ₹${productPrice.toFixed(2)}`;
+        listItem.appendChild(deleteButton);
+        cartItemsList.appendChild(listItem);
+        totalPrice += productPrice;
+        cartTotal.textContent = `₹${totalPrice.toFixed(2)}`;
+      });
+    });
+  </script>
+</body>
+</html>
+{% endblock %}

@@ -1,9 +1,15 @@
 from django.views import View
 from django.shortcuts import render, redirect
-from store_app.models import Product
+from store_app.models import Product,Categorie
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.core.exceptions import ValidationError
+from django.contrib.auth.decorators import login_required
+from cart.cart import Cart
+
+
+
+
 
 class AuthView(View):
     def get(self, request):
@@ -21,8 +27,10 @@ def HOME(request):
 
 def product(request):
     products = Product.objects.all()
+    categories = Categorie.objects.all()
     context = {
         'products': products,
+        'categories': categories,
     }
     return render(request, 'main/product.html', context)
 
@@ -89,3 +97,54 @@ def search(request):
 
     return render(request, 'main/search.html', context)
 
+
+
+
+
+
+
+@login_required(login_url="/main/register/auth/")
+def cart_add(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.add(product=product)
+    return redirect("home")
+
+
+@login_required(login_url="/main/register/auth/")
+def item_clear(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.remove(product)
+    return redirect("cart_detail")
+
+
+@login_required(login_url="/main/register/auth/")
+def item_increment(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.add(product=product)
+    return redirect("cart_detail")
+
+
+@login_required(login_url="/main/register/auth/")
+def item_decrement(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.decrement(product=product)
+    return redirect("cart_detail")
+
+
+@login_required(login_url="/main/register/auth/")
+def cart_clear(request):
+    cart = Cart(request)
+    cart.clear()
+    return redirect("cart_detail")
+
+
+@login_required(login_url="/main/register/auth/")
+def cart_detail(request):
+    return render(request, 'cart/cart_detail.html')
+
+
+    return render(request, 'product_list.html', {'products': products})

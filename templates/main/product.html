@@ -1,105 +1,169 @@
 {% extends 'main/base.html' %}
 
-
 {% block content %}
 <!doctype html>
 <html lang="en">
 
 <head>
     <!-- Your head content goes here -->
+    <style>
+        /* Custom CSS styles go here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .page-nav {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+        }
+
+        .page-nav h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .page-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        .page-nav ul li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .page-nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .page-nav ul li a:hover {
+            color: #555;
+        }
+
+        .product-cover {
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        .product-card {
+            width: calc(20.3333% - 20px);
+            margin-right: 20px;
+            margin-bottom: 20px;
+            float: left;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card img {
+            width: 100%;
+            height:90px;
+            display: block;
+        }
+
+        .product-detail {
+            padding: 20px;
+        }
+
+        .product-detail h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .product-detail s {
+            font-size: 16px;
+            color: #999;
+            margin-right: 10px;
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .product-detail button {
+            padding: 10px 20px;
+            background-color: #dc3545;
+            border: none;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .product-detail button:hover {
+            background-color: #c82333;
+        }
+
+        /* Clearfix for float elements */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
 </head>
 
 <body>
 
-    <div class="page-nav no-margin row">
+    <div class="page-nav">
         <div class="container">
-            <div class="row">
-                <h2 class="text-start">View All Products</h2>
-                <ul>
-                    <li> <a href="#"><i class="bi bi-house-door"></i> Home</a></li>
-                    <li><i class="bi bi-chevron-double-right pe-2"></i> View All Products</li>
-                </ul>
-            </div>
+            <h2>View All Products</h2>
+            <ul>
+                <li><a href="#"><i class="bi bi-house-door"></i> Home</a></li>
+                <li><i class="bi bi-chevron-double-right pe-2"></i> View All Products</li>
+            </ul>
         </div>
     </div>
 
-    <div class="container-fluid py-5 product-cover">
-        <div class="container-xl">
+    <div class="product-cover">
+        <div class="container">
             <div class="row">
-                <div class="col-md-3">
-                    <!-- Your filter by category, price range, and brand code goes here -->
-                </div>
-                <div class="col-md-9">
-                    <div class="row">
-                        {% for prod in products %}
+                {% for prod in products %}
 
-                        <div class="col-lg-4 col-sm-6 mb-4">
-                            <div class="bg-white p-2 shadow-md">
-                                <div class="text-center">
+                <div class="col-lg-4 col-md-6 mb-4 product-card">
+                    <div class="bg-white p-2 shadow-md">
+                        <div class="text-center">
+                            <a href="detail.html">
+                                <img src="/{{prod.image}}" alt="">
+                            </a>
+                        </div>
+                        <div class="detail p-2 product-detail">
+                            <h4>{{prod.name | truncatechars:40}}</h4>
+
+                            <s>{{prod.price }}</s>
+
+                          
+                            
+                            </ul>
+                            <div class="row pt-2">
+                                <div class="col-md-6">
                                     <a href="detail.html">
-                                        <img src="/{{prod.image}}" alt="">
+                                        <button class="btn mb-2 fw-bold w-100 btn-danger">Buy Now</button>
                                     </a>
                                 </div>
-                                <div class="detail p-2">
-                                    <h4 class="mb-1 fs-5 fw-bold">{{prod.name |truncatechars:40}}</h4>
-
-                                    <s class="fs-5 ps-3">{{prod.price }}</s>
-
-                                    <ul class="mt-0 vgth">
-                                        <li class="fs-8">
-                                            <i class="bi text-warning bi-star-fill"></i>
-                                            <i class="bi text-warning bi-star-fill"></i>
-                                            <i class="bi text-warning bi-star-fill"></i>
-                                            <i class="bi text-warning bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                        </li>
-                                        <li class="float-end gvi">
-                                            <i class="bi text-danger bi-heart-fill"></i>
-                                        </li>
-                                    </ul>
-                                    <div class="row pt-2">
-                                        <div class="col-md-6">
-                                            <a href="detail.html">
-                                                <button class="btn mb-2 fw-bold w-100 btn-danger">Buy Now</button>
-                                            </a>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <button class="btn fw-bold w-100 btn-outline-danger">Add to Cart</button>
-                                        </div>
-                                    </div>
+                                <div class="col-md-6">
+                                    <button class="btn fw-bold w-100 btn-outline-danger">Add to Cart</button>
                                 </div>
                             </div>
                         </div>
-                        {% endfor %}
-
-                        <div class="row ">
-                            <nav class="" aria-label="...">
-                                <ul class="pagination justify-content-end">
-                                    <li class="page-item disabled">
-                                        <a class="page-link">Previous</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item active" aria-current="page">
-                                        <a class="page-link" href="#">2</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Next</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-
                     </div>
                 </div>
+                {% endfor %}
+
             </div>
         </div>
     </div>
+
+    <div class="clearfix"></div>
 
 </body>
 
 </html>
-
 
 
 
