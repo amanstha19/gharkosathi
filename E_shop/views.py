@@ -1,22 +1,21 @@
 from django.views import View
 from django.shortcuts import render, redirect
-from store_app.models import Product,Categorie
+from store_app.models import Product, Categorie
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login, logout
-from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError
 from cart.cart import Cart
-
-
-
 
 
 class AuthView(View):
     def get(self, request):
         return render(request, 'register/auth.html')
 
+
 def BASE(request):
     return render(request, 'main/base.html')
+
 
 def HOME(request):
     products = Product.objects.all()
@@ -24,6 +23,7 @@ def HOME(request):
         'products': products,
     }
     return render(request, 'main/index.html', context)
+
 
 def product(request):
     products = Product.objects.all()
@@ -79,7 +79,6 @@ def user_login(request):
             return render(request, 'register/auth.html', {'error_message': 'Invalid login credentials'})
 
 
-
 def user_logout(request):
     logout(request)
     return redirect('home')
@@ -93,14 +92,7 @@ def search(request):
         'products': products,
     }
 
-
-
     return render(request, 'main/search.html', context)
-
-
-
-
-
 
 
 @login_required(login_url="/main/register/auth/")
@@ -147,4 +139,4 @@ def cart_detail(request):
     return render(request, 'cart/cart_detail.html')
 
 
-    return render(request, 'product_list.html', {'products': products})
+
