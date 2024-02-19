@@ -17,63 +17,105 @@
             </div>
         </div>
         
-        <div class="latest-products-container">
-            {% for product_item in products %}
-                <div class="product-card">
-                    <div class="product-bg">
-                        <div class="product-detail">
-                            <div class="text-center">
-                                <a href="detail.html">
-                                    <img src="{{ product_item.image }}" alt="{{ product_item.name }}">
-                                </a>
-                            </div>
-                            <h4 class="mb-1 fs-5 fw-bold">{{ product_item.name | truncatechars:20 }}</h4>
-                            
+       <div class="container">
+            <div class="row flex-row"> <!-- Changed class to flex-row -->
+                {% for prod in products %}
+                <div class="col-lg-4 col-md-6 mb-4 product-card" data-category="{{ prod.category.id }}">
+                    <div class="bg-white p-2 shadow-md">
+                        <div class="text-center">
+                            <a href="detail.html">
+                                <img src="/{{ prod.image }}" alt="">
+                            </a>
+                        </div>
+                        <div class="detail p-2 product-detail">
+                            <h4>{{ prod.name | truncatechars:40 }}</h4>
+                            <h4>Rs {{ prod.price }}</h4> <!-- Added "Rs" prefix -->
                             <div class="row pt-2">
                                 <div class="col-md-6">
                                     <button class="btn mb-2 fw-bold w-100 btn-danger">Buy Now</button>
                                 </div>
                                 <div class="col-md-6">
-                                    <form action="{% url 'cart_add' product_item.id %}" method="post" id="add-to-cart-form-{{ product_item.id }}">
+                                    <form class="add-to-cart-form" data-product-id="{{ prod.id }}">
                                         {% csrf_token %}
-                                        <button type="submit" class="btn fw-bold w-100 btn-outline-danger add-to-cart" data-product-id="{{ product_item.id }}">Add to Cart</button>
+                                        <button type="button" class="add-to-cart btn fw-bold w-100 btn-outline-danger">Add to Cart</button>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
     </div>
+    <div class="clearfix"></div>
 </div>
+
+<style>
+    .filter-btn-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px; /* Adjust as needed */
+    }
+
+    .filter-btn {
+        /* Add your button styles here */
+    }
+
+    .flex-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between; /* or any other alignment you prefer */
+    }
+
+    .product-card {
+        flex: 0 0 calc(33.333% - 20px); /* Adjust as needed */
+        margin-bottom: 20px; /* Adjust as needed */
+    }
+</style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-$(document).ready(function() {
-    $('.add-to-cart').click(function(e) {
-        e.preventDefault();
-        var product_id = $(this).data('product-id');
-        
-        $.ajax({
-            type: 'POST',
-            url: '/cart/add/' + product_id,
-            dataType: 'json',
-            beforeSend: function(xhr, settings) {
-                var csrftoken = Cookies.get('csrftoken');
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            },
-            success: function(data) {
-                // Optionally, update the cart count or show a success message
-                console.log('Item added to cart successfully');
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                // Handle errors if any
-                console.error('Error adding item to cart:', errorThrown);
-            }
+    $(document).ready(function() {
+        $('.add-to-cart').click(function(e) {
+            e.preventDefault();
+            var productId = $(this).closest('.add-to-cart-form').data('product-id');
+            
+            $.ajax({
+                type: 'POST',
+                url: '/cart/add/' + productId + '/',
+                dataType: 'json',
+                beforeSend: function(xhr, settings) {
+                    var csrftoken = getCookie('csrftoken');
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                },
+                success: function(data) {
+                    console.log('Item added to cart successfully');
+                    // Optionally, update the cart count or show a success message
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.error('Error adding item to cart:', errorThrown);
+                    // Handle errors if any
+                }
+            });
         });
+        
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
     });
-});
 </script>
 
 {% endblock %}
