@@ -9,8 +9,8 @@ class tagTabularInline(admin.TabularInline):
 
 class ProductAdmin(admin.ModelAdmin):
     inlines = [imagesTabularInline, tagTabularInline]
-    list_display = ('name', 'price', 'stock', 'status', 'added_date')
-    list_filter = ('stock', 'status', 'added_date')
+    list_display = ('name', 'price', 'stock',  'added_date')
+    list_filter = ('stock', 'added_date')
     search_fields = ('name', 'description')
 
 admin.site.register(Categorie)

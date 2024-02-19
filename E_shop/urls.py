@@ -10,6 +10,8 @@ from .views import AuthView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.HOME, name='home'),
+    path('index/', views.index, name="index"),
+
     path('base/', views.BASE, name='base'),
     path('product/', views.product, name='product'),
     path('register/', views.register, name='register'),

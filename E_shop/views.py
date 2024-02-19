@@ -8,10 +8,18 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from cart.cart import Cart
 
+def index(request):
+    products = Product.objects.all()
+    context = {
+        'products': products,
+    }
+    return render(request, 'main/index.html', context)
 
 class AuthView(View):
     def get(self, request):
         return render(request, 'register/auth.html')
+
+
 
 
 def BASE(request):

@@ -26,7 +26,7 @@ class Filter_Price(models.Model):
 
 class Product(models.Model):
     STOCK_CHOICES = (('IN STOCK', 'IN STOCK'), ('OUT OF STOCK', 'OUT OF STOCK'))
-    STATUS_CHOICES = (('Publish', 'Publish'), ('DRAFT', 'DRAFT'))
+
 
     unique_id = models.CharField(unique=True, max_length=200, null=True, blank=True)
     image = models.ImageField(upload_to='Product_images/img')
@@ -34,7 +34,7 @@ class Product(models.Model):
     price = models.FloatField()
     description = models.CharField(max_length=500)
     stock = models.CharField(choices=STOCK_CHOICES, max_length=200)
-    status = models.CharField(choices=STATUS_CHOICES, max_length=200)
+
     added_date = models.DateTimeField(default=timezone.now)
 
     categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE)
