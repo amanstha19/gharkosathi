@@ -81,8 +81,32 @@
         margin-bottom: 20px; /* Adjust as needed */
     }
 </style>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+    $(document).ready(function() {
+    $('.add-to-cart').click(function(e) {
+        e.preventDefault();
+        var product_id = $(this).data('product-id');
+        
+        $.ajax({
+            type: 'POST',
+            url: '/cart/add/' + product_id,
+            dataType: 'json',
+            beforeSend: function(xhr, settings) {
+                var csrftoken = Cookies.get('csrftoken');
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            },
+            success: function(data) {
+                // Optionally, update the cart count or show a success message
+                console.log('Item added to cart successfully');
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                // Handle errors if any
+                console.error('Error adding item to cart:', errorThrown);
+            }
+        });
+    });
+});
     document.addEventListener('DOMContentLoaded', function() {
         const filterBtns = document.querySelectorAll('.filter-btn');
         const items = document.querySelectorAll('.product-card');

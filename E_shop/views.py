@@ -1,5 +1,6 @@
-from django.views import View
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
+from django.views import View
 from store_app.models import Product, Categorie
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login, logout
@@ -94,12 +95,18 @@ def search(request):
 
     return render(request, 'main/search.html', context)
 
+
 @login_required(login_url="/main/register/auth/")
 def cart_add(request, product_id):
-    cart = Cart(request)
-    product = Product.objects.get(id=product_id)
-    cart.add(product=product)
-    return redirect("home")
+    if request.method == "POST" and request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+        cart = Cart(request)
+        product = Product.objects.get(id=product_id)
+        cart.add(product=product)
+
+        # Return JSON response indicating success
+        return JsonResponse({'success': True})
+    else:
+        return redirect("home")
 
 
 @login_required(login_url="/main/register/auth/")
@@ -136,4 +143,3 @@ def cart_clear(request):
 @login_required(login_url="/main/register/auth/")
 def cart_detail(request):
     return render(request, 'cart/cart_detail.html')
-

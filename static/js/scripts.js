@@ -7,3 +7,7 @@ function showForm(formType) {
     document.querySelector('.register-form').style.display = 'block';
   }
 }
+
+
+
+

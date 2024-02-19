@@ -1,15 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-
-
     {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upahar</title>
@@ -17,22 +11,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <header>
-        
         <nav class="nav1">
-        
             <div class="left">
-    {% if user.is_authenticated %}
-        <h6><a href="{% url 'logout' %}">Logout</a></h6>
-    {% else %}
-        <h6><a href="{% url 'auth' %}">Login and register</a></h6>
-    {% endif %}
-</div>
-
-           
-           
+                {% if user.is_authenticated %}
+                    <h6><a href="{% url 'logout' %}">Logout</a></h6>
+                {% else %}
+                    <h6><a href="{% url 'auth' %}">Login and register</a></h6>
+                {% endif %}
             </div>
             <div class="right">
                 <i class="fa fa-facebook"></i>
@@ -41,66 +30,44 @@
             </div>
         </nav>
 
-        <!--  nav1 sakkyo -->
-        <!--  nav2 suru -->
-     
-
-      
+        <!-- nav2 -->
         <nav class="nav2">
             <div class="nav2-left">
                 <h1>Upahar<span>Nepal</span> </h1>
-    
             </div>
             <form action="/search/" method="get">
-            <div class="between">
-                <input type="text" placeholder="Search..." name="search" id="search">
-                <button type="submit">Search</button>
-            </div>
-                 </form>
+                <div class="between">
+                    <input type="text" placeholder="Search..." name="search" id="search">
+                    <button type="submit">Search</button>
+                </div>
+            </form>
             <div class="nav2-right">
-              
-    <a href="{% url 'cart' %}" class="cart-button">
-        <i class="fa fa-shopping-cart"></i> View Cart
-    </a>
-    
-    <i class="fa fa-phone"></i>+977 9840259838
-    <i class="fa fa-envelope"></i>upahar@gmail.com
-</div>
-
-            
-
-            
+                <a href="{% url 'cart' %}" class="cart-button">
+                    <i class="fa fa-shopping-cart"></i> View Cart
+                </a>
+                <i class="fa fa-phone"></i>+977 9840259838
+                <i class="fa fa-envelope"></i>upahar@gmail.com
+            </div>
         </nav>
 
-        <!-- naya nav suru hunxa yaha bata -->
-<nav class="nav3">
+        <!-- nav3 -->
+        <nav class="nav3">
             <ul>
                 <li><a href=""><i class="fa fa-home"></i>Home </a></li>
-                <li>
-                    <a href="{% url 'product' %}"><i class="fa fa-male"></i> Categories</a>
-                  
-                </li>
+                <li><a href="{% url 'product' %}"><i class="fa fa-male"></i> Categories</a></li>
                 <li><a href=""><i class=""></i>Help</a></li>
                 <li><a href=""><i class=""></i>About us </a></li>
-                
-               
-          
-
             </ul>
         </nav>
-
     </header>
-  <body>
-  
-    {% block content %}
 
+    <body>
+        {% block content %}
+        <!-- Your page content goes here -->
+        {% endblock %}
+    </body>
 
-   {% endblock %}
-
-</body>
-
-
- <footer class="footer">
+    <footer class="footer">
         <div class="footer-left">
             <i class="fa fa-phone"></i>+977 9840259838
             <i class="fa fa-envelope"></i>upahar@gmail.com
@@ -109,3 +76,33 @@
             <p>&copy; 2024 Upahar Nepal. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- JavaScript for AJAX request -->
+    <script>
+    $(document).ready(function() {
+        $('.add-to-cart').click(function(e) {
+            e.preventDefault();
+            var product_id = $(this).data('product-id');
+            
+            $.ajax({
+                type: 'POST',
+                url: '/cart/add/' + product_id,
+                dataType: 'json',
+                beforeSend: function(xhr, settings) {
+                    var csrftoken = Cookies.get('csrftoken');
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                },
+                success: function(data) {
+                    // Optionally, update the cart count or show a success message
+                    console.log('Item added to cart successfully');
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    // Handle errors if any
+                    console.error('Error adding item to cart:', errorThrown);
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
