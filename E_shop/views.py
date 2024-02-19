@@ -94,11 +94,10 @@ def search(request):
 
     return render(request, 'main/search.html', context)
 
-
 @login_required(login_url="/main/register/auth/")
-def cart_add(request, id):
+def cart_add(request, product_id):
     cart = Cart(request)
-    product = Product.objects.get(id=id)
+    product = Product.objects.get(id=product_id)
     cart.add(product=product)
     return redirect("home")
 
@@ -137,6 +136,4 @@ def cart_clear(request):
 @login_required(login_url="/main/register/auth/")
 def cart_detail(request):
     return render(request, 'cart/cart_detail.html')
-
-
 

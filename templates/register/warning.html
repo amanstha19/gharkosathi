@@ -1,0 +1,620 @@
+@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Spartan", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Global Styles */
+
+h1 {
+  font-size: 50px;
+  line-height: 64px;
+  color: #222;
+}
+
+h2 {
+  font-size: 46px;
+  line-height: 54px;
+  color: #222;
+}
+
+h4 {
+  font-size: 20px;
+  color: #222;
+}
+
+h6 {
+  font-weight: 700;
+  font-size: 12px;
+}
+
+p {
+  font-size: 16px;
+  color: #465b52;
+  margin: 15px 0 20px 0;
+}
+
+.section-p1 {
+  padding: 40px 80px;
+}
+
+.section-m1 {
+  margin: 40px 0;
+}
+
+body {
+  width: 100%;
+  margin: 0;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+  border: 2px solid #f4e8e800;
+  border-radius: 1px;
+  margin: 10px;
+  background-color: rgb(20, 13, 13);
+}
+
+:root {
+  --primary: rgb(72, 72, 186);
+  --secondary: rgb(39, 39, 39);
+  --light: rgb(95, 94, 94);
+}
+
+header {
+  width: 100%;
+  height: auto;
+}
+
+/* Navigation Styles */
+.nav1 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: auto;
+  box-shadow: 2px 0px 3px rgb(56, 56, 149);
+  text-align: center;
+  background-color: rgb(192, 192, 245);
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.nav1 .img {
+  flex-basis: 20%;
+}
+
+.nav1 .img img {
+  width: 70px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.nav1 .center {
+  flex-basis: 60%;
+}
+
+.nav1 .left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav1 .left .register {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav1 .left .register h6 {
+  margin: 0;
+}
+
+.nav1 .left .register a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  margin: 0 10px;
+}
+
+.nav1 .right {
+  flex-basis: 20%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav1 .right i {
+  font-size: 20px;
+  margin: 2px 20px;
+  cursor: pointer;
+  color: black;
+}
+
+.nav2 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  flex-wrap: wrap;
+  background-color: #8399ee;
+  padding: 10px 20px;
+  align-items: center;
+}
+
+.nav2 .nav2-left {
+  width: 100%;
+  flex-basis: auto;
+  margin-bottom: 10px;
+}
+
+
+
+.nav2 .nav2-left h1 span {
+  color: var(--secondary);
+  font-weight: bold;
+  letter-spacing: 2px;
+  
+}
+
+.nav2 .between {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.nav2 .between input {
+  flex-grow: 1;
+  padding: 10px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  font-size: 16px;
+}
+
+.nav2 .between button {
+  flex-shrink: 0;
+  padding: 10px;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  background-color: #555;
+  color: #fff;
+  font-size: 16px;
+}
+
+.nav2 .nav2-right {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav2 .nav2-right i {
+  font-size: 20px;
+  margin-left: 20px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.nav3 {
+  background-color: #fff; /* Background color */
+  padding: 10px;
+  border-bottom: 2px solid #eee; /* Bottom border */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow */
+}
+
+.nav3 ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between; /* Adjust alignment */
+  margin: 0;
+  padding: 0;
+}
+
+.nav3 li {
+  position: relative;
+  margin: 0;
+}
+
+.nav3 a {
+  text-decoration: none;
+  color: #333; /* Text color */
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px; /* Adjust padding */
+  transition: color 0.3s; /* Smooth color transition */
+}
+
+.nav3 i {
+  margin-right: 5px;
+}
+
+.nav3 li:hover > a {
+  color: #007bff; /* Highlight color on hover */
+}
+
+.nav3 ul ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff; /* Background color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
+  border-radius: 4px; /* Rounded corners */
+}
+
+.nav3 ul li:hover > ul {
+  display: block;
+}
+
+
+.nav1, .nav2, .footer {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.nav1 .left h6, .nav2 .nav2-left h1 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.nav1, .nav2 {
+  background-color: #333;
+  color: #fff;
+}
+
+.nav2 .between {
+  flex: 1;
+  display: flex;
+}
+
+.nav2 .between input[type="text"] {
+  width: 150px; /* Adjust the width as needed */
+  padding: 8px;
+}
+
+.nav2 .between button {
+  padding: 8px 15px; /* Adjust the padding as needed */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-left: 5px; /* Add spacing between input and button */
+}
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  justify-content: center;
+}
+.nav2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #8399ee;
+}
+
+.nav2 .nav2-left {
+  display: flex;
+  align-items: center;
+}
+
+.nav2 .nav2-left .logo {
+  width: 50px; /* Adjust the width as needed */
+  height: auto;
+  margin-right: 10px; /* Add spacing between the logo and text */
+}
+
+.nav2 .nav2-right {
+  display: flex;
+  align-items: center;
+}
+
+.search-button {
+  border: #413d3d solid 0.5px;
+  border-radius: 9px;
+  margin-left: 3px;
+}
+
+.search-button:hover {
+  background-color: rgb(202, 194, 194);
+}
+
+
+
+.nav2 .nav2-right button {
+  margin-left: 20px; /* Add spacing between the search button and login/register button */
+}
+
+
+.featured img {
+  width: 100%;
+  max-height: 450px;
+  object-fit: cover;
+}
+.filter-container {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #ba0a22;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+
+
+@media only screen and (max-width: 1200px) {
+  .section-p1 {
+    padding: 40px 40px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .section-p1 {
+    padding: 40px 20px;
+  }
+
+  .nav1 .img {
+    flex-basis: 30%;
+  }
+
+  .nav1 .center {
+    flex-basis: 50%;
+  }
+
+  .nav1 .left {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav1 .right {
+    flex-basis: 30%;
+  }
+
+  .nav2 .nav2-left {
+    text-align: center;
+  }
+  
+}
+.navbar {
+  justify-content: space-between;
+}
+
+.navbar .login-register {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .login-register a {
+  color: #333;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+.search-form {
+  width: 200px; /* Adjust width as needed */
+  margin-left: 15px; /* Adjust margin as needed */
+  justify-content: flex-start;
+}
+
+/* Add this to your custom CSS file */
+
+.content {
+  padding: 16px;
+  overflow-y: auto; /* Add scrollbar if content overflows */
+}
+
+.product-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.product-box {
+  text-align: center;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.product-box:hover{
+  background-color: #8995c4;
+}
+.product-box img{
+  max-height: 200px;
+}
+.product-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.product-name {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.stars {
+  color: gold;
+}
+
+.price {
+  margin-top: 10px;
+  font-size: 18px;
+}
+/* here */
+
+.nav2-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 50px; /* Adjust the width as needed */
+  height: auto;
+  margin-right: 10px;
+  border-radius: 50%;/* Add spacing between the logo and text */
+}
+
+.nav2-left h1 {
+  margin: 0;
+  font-size: 28px; /* Increase the font size */
+}
+
+.filter-button {
+  padding: 10px 20px;
+  background-color: #829fbe;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.filter-button:hover {
+  background-color: #7d8792;
+}
+.search-button {
+  border: #413d3d solid 0.5px;
+  border-radius: 9px;
+  margin-left: 3px;
+}
+
+.search-button:hover {
+  background-color: rgb(202, 194, 194);
+}
+
+.nav2 .between {
+  display: flex;
+  justify-content: flex-end; /* Align items to the right */
+  align-items: center;
+  flex: 1;
+}
+
+.nav2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #a6adcc;
+}
+
+.nav2 .nav2-left {
+  display: flex;
+  align-items: center;
+}
+
+.nav2 .nav2-left .logo {
+  width: 50px; /* Adjust the width as needed */
+  height: auto;
+  margin-right: 10px; /* Add spacing between the logo and text */
+}
+
+.nav2 .nav2-right {
+  display: flex;
+  align-items: center;
+}
+
+.search-button {
+  border: #413d3d solid 0.5px;
+  border-radius: 9px;
+  margin-left: 3px;
+}
+
+.search-button:hover {
+  background-color: rgb(202, 194, 194);
+}
+
+.nav2 .nav2-right button {
+  margin-left: 10px;
+  text-decoration: none;
+   /* Add spacing between the search button and login/register button */
+}
+/* shop now in user section */
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.product {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.product-image {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.product-name {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.product-price {
+  margin-top: 5px;
+  color: #888;
+}
+
+.btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+.nav1 .left .register a,
+.nav2 .between button.search-button {
+  background-color: #f5f5dc; /* Beige-ish color */
+  color: #333; /* Text color */
+  border: none;
+  text-decoration: none; /* Remove underline */
+}
+
+.nav1 .left .register a:hover,
+.nav2 .between button.search-button:hover {
+  background-color: #dcdcbf; /* Darker shade on hover */
+}
