@@ -43,9 +43,9 @@
                                     <button class="btn mb-2 fw-bold w-100 btn-danger">Buy Now</button>
                                 </div>
                                 <div class="col-md-6">
-                                    <form action="{% url 'cart_add' prod.id %}" method="post"> <!-- Changed product_item.id to prod.id -->
+                                    <form class="add-to-cart-form" data-product-id="{{ prod.id }}">
                                         {% csrf_token %}
-                                        <button type="submit" class="btn fw-bold w-100 btn-outline-danger">Add to Cart</button>
+                                        <button type="button" class="add-to-cart btn fw-bold w-100 btn-outline-danger">Add to Cart</button>
                                     </form>
                                 </div>
                             </div>
@@ -81,53 +81,48 @@
         margin-bottom: 20px; /* Adjust as needed */
     }
 </style>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-    $('.add-to-cart').click(function(e) {
-        e.preventDefault();
-        var product_id = $(this).data('product-id');
-        
-        $.ajax({
-            type: 'POST',
-            url: '/cart/add/' + product_id,
-            dataType: 'json',
-            beforeSend: function(xhr, settings) {
-                var csrftoken = Cookies.get('csrftoken');
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            },
-            success: function(data) {
-                // Optionally, update the cart count or show a success message
-                console.log('Item added to cart successfully');
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                // Handle errors if any
-                console.error('Error adding item to cart:', errorThrown);
-            }
-        });
-    });
-});
-    document.addEventListener('DOMContentLoaded', function() {
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const items = document.querySelectorAll('.product-card');
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                filterBtns.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-
-                const filterValue = this.getAttribute('data-filter');
-
-                items.forEach(item => {
-                    const category = item.getAttribute('data-category');
-                    if (filterValue === 'all' || category === filterValue) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
+        $('.add-to-cart').click(function(e) {
+            e.preventDefault();
+            var productId = $(this).closest('.add-to-cart-form').data('product-id');
+            
+            $.ajax({
+                type: 'POST',
+                url: '/cart/add/' + productId + '/',
+                dataType: 'json',
+                beforeSend: function(xhr, settings) {
+                    var csrftoken = getCookie('csrftoken');
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                },
+                success: function(data) {
+                    console.log('Item added to cart successfully');
+                    // Optionally, update the cart count or show a success message
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.error('Error adding item to cart:', errorThrown);
+                    // Handle errors if any
+                }
             });
         });
+        
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
     });
 </script>
 
