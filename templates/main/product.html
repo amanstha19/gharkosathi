@@ -40,12 +40,13 @@
                             <h4>Rs {{ prod.price }}</h4> <!-- Added "Rs" prefix -->
                             <div class="row pt-2">
                                 <div class="col-md-6">
-                                    <a href="detail.html">
-                                        <button class="">Buy Now</button>
-                                    </a>
+                                    <button class="btn mb-2 fw-bold w-100 btn-danger">Buy Now</button>
                                 </div>
                                 <div class="col-md-6">
-                                    <button class="">Add to Cart</button>
+                                    <form action="{% url 'cart_add' prod.id %}" method="post"> <!-- Changed product_item.id to prod.id -->
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn fw-bold w-100 btn-outline-danger">Add to Cart</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
