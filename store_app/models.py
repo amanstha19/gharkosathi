@@ -2,6 +2,8 @@ from django.db import models
 from django.utils import timezone
 from django.core.validators import EmailValidator
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
+
 
 class Categorie(models.Model):
     model_name = models.CharField(max_length=200)
@@ -66,3 +68,16 @@ class CustomUser(models.Model):
         email_exists = CustomUser.objects.exclude(pk=self.pk).filter(email=self.email).exists()
         if email_exists:
             raise ValidationError({'email': 'This email address is already in use.'})
+
+
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # Add other fields related to orders
+
+class Delivery(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    # Add other fields related to deliveries
+
+class Wishlist(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # Add other fields related to wishlist

@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from cart.cart import Cart
+from store_app.models import Order, Delivery, Wishlist
 
 def index(request):
     products = Product.objects.all()
@@ -151,3 +152,21 @@ def cart_clear(request):
 @login_required(login_url="/main/register/auth/")
 def cart_detail(request):
     return render(request, 'cart/cart_detail.html')
+
+
+def userprofile(request):
+    user = request.user
+    orders = Order.objects.filter(user=user)
+    deliveries = Delivery.objects.filter(order__user=user)
+    wishlist, created = Wishlist.objects.get_or_create(user=user)
+
+    context = {
+        'user': user,
+        'orders': orders,
+        'deliveries': deliveries,
+        'wishlist': wishlist,
+    }
+
+
+    return render(request, 'main/userprofile.html', context)
+

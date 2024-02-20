@@ -5,7 +5,7 @@
 {% load static %}
 
 <div class="featured">
-    <img src="{% static 'images/img.jpg' %}" alt="">
+    <img src="{% static 'images/img.jpg' %}" alt="" class="featured-image">
 </div>
 
 <div class="latest-products pt-5 pb-0">
@@ -24,7 +24,7 @@
                     <div class="bg-white p-2 shadow-md">
                         <div class="text-center">
                             <a href="detail.html">
-                                <img src="/{{ prod.image }}" alt="">
+                                <img src="/{{ prod.image }}" alt="" class="product-image">
                             </a>
                         </div>
                         <div class="detail p-2 product-detail">
@@ -71,6 +71,16 @@
     .product-card {
         flex: 0 0 calc(15% - 30px); /* Adjust as needed */
         margin-bottom: 20px; /* Adjust as needed */
+    }
+    
+    .featured-image {
+        max-width: 100%; /* Adjust as needed */
+        height: auto;
+    }
+    
+    .product-image {
+        max-width: 100%; /* Adjust as needed */
+        height: auto;
     }
 </style>
 
