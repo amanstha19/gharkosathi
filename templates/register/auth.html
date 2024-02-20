@@ -15,6 +15,8 @@
     <body>
 
         <div class="container" id="container">
+            
+            
             <div class="form-container sign-up">
 
                 <form id="register-form" action="{% url 'register' %}" method="post">
@@ -30,7 +32,12 @@
                     <input type="text" name="first_name" placeholder="First Name" />
                     <input type="text" name="last_name" placeholder="Last Name" />
                     <input type="text" name="username" placeholder="Username" />
+                    
+            
                     <input name="email" placeholder="Email" type="email" />
+                      {% if error_message %}
+                  <div style="color: red;">{{ error_message }}</div>
+                   {% endif %}
                     <input type="password" name="pass1" placeholder="Password" />
                     <input type="password" name="pass2" placeholder="Confirm Password" />
                     <div id="password-error" style="color: red;"></div> <!-- Error message element -->
@@ -46,7 +53,11 @@
                         <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                         <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                     </div>
-                    <span>or use your email password</span>
+                       {% if error_message %}
+                <div style="color: red;">{{ error_message }}</div>
+                   {% endif %}
+            
+                  
                     <input type="text" name="username" placeholder="Username">
                     <input type="password"  name="password" placeholder="Password">
                     <a href="#">Forget Your Password?</a>

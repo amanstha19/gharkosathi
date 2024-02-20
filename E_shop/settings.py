@@ -122,3 +122,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CART_SESSION_ID = 'cart'
+
+
+LOGIN_URL = '/main/register/auth/'

@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from cart.cart import Cart
 from store_app.models import Order, Delivery, Wishlist
+from django.contrib.auth import login
 
 def index(request):
     products = Product.objects.all()
@@ -154,6 +155,10 @@ def cart_detail(request):
     return render(request, 'cart/cart_detail.html')
 
 
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+
+@login_required
 def userprofile(request):
     user = request.user
     orders = Order.objects.filter(user=user)
@@ -167,6 +172,4 @@ def userprofile(request):
         'wishlist': wishlist,
     }
 
-
     return render(request, 'main/userprofile.html', context)
-
