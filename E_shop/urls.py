@@ -23,6 +23,7 @@ urlpatterns = [
     path('cart/cart_detail/', views.cart_detail, name='cart'),
     path('cart/add/<int:product_id>/', views.cart_add, name='cart_add'),
     path('userprofile/', views.userprofile,name='userprofile'),
+    path('checkout/', views.checkout, name='checkout'),
 ]
 
 if settings.DEBUG:

@@ -27,10 +27,18 @@
                         <div class="detail p-2 product-detail">
                             <h4>{{ prod.name | truncatechars:10 }}</h4>
                             <h4>Rs {{ prod.price }}</h4> <!-- Added "Rs" prefix -->
+                            
+                            
                             <div class="row pt-2">
-                                <div class="col-md-6">
-                                    <button class="btn mb-2 fw-bold w-100 btn-danger">Buy Now</button>
-                                </div>
+    <div class="col-md-6">
+        <form action="{% url 'checkout' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+            <button type="submit" class="btn mb-2 fw-bold w-100 btn-danger">Buy Now</button>
+        </form>
+    </div>
+                            
+                            
                                 <div class="col-md-6">
                                     <form class="add-to-cart-form" data-product-id="{{ prod.id }}">
                                         {% csrf_token %}
@@ -76,11 +84,11 @@
     }
     
     .product-image {
-        max-width: 100%; /* Adjust as needed */
-        height: auto;
+        max-width: 100%; /* Ensure the image doesn't exceed the container width */
+        height: auto; /* Allow the height to adjust dynamically based on the image's aspect ratio */
+        object-fit: cover; /* Cover the entire container with the image, maintaining aspect ratio */
     }
 </style>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {

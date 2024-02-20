@@ -7,8 +7,9 @@ from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from cart.cart import Cart
-from store_app.models import Order, Delivery, Wishlist
+from store_app.models import Order, Delivery, Wishlist,OrderItem
 from django.contrib.auth import login
+
 
 def index(request):
     products = Product.objects.all()
@@ -173,3 +174,58 @@ def userprofile(request):
     }
 
     return render(request, 'main/userprofile.html', context)
+
+
+
+@login_required(login_url="/main/register/auth/")
+def checkout(request):
+    if request.method == "POST":
+        # Retrieve form data
+        items_json = request.POST.get('itemsJson', '')
+        name = request.POST.get('name', '')
+        email = request.POST.get('email', '')
+        address = request.POST.get('address1', '') + " " + request.POST.get('address2', '')
+        city = request.POST.get('city', '')
+        state = request.POST.get('state', '')
+        zip_code = request.POST.get('zip_code', '')
+        phone = request.POST.get('phone', '')
+
+        # Create an order
+        order = Order.objects.create(
+            user=request.user,
+            total_price=0,  # You need to calculate this based on the items
+            status='Pending',
+            # Other fields...
+        )
+
+        # Add order items
+        items = []  # To store order items for later calculation of total price
+        for item_json in items_json:
+            # Parse the JSON data to retrieve product ID and quantity
+            product_id = item_json['product_id']
+            quantity = item_json['quantity']
+
+            # Get the product
+            product = Product.objects.get(id=product_id)
+
+            # Create an order item
+            order_item = OrderItem.objects.create(
+                order=order,
+                product=product,
+                quantity=quantity
+            )
+
+            items.append(order_item)
+
+        # Calculate total price based on order items
+        total_price = sum(item.product.price * item.quantity for item in items)
+        order.total_price = total_price
+        order.save()
+
+        # Render the checkout page with a thank you message and order ID
+        return render(request, 'register/checkout.html', {'thank': True, 'id': order.id})
+
+    # Render the checkout page if the request method is not POST
+    return render(request, 'register/checkout.html')
+
+

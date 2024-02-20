@@ -1,9 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils import timezone
 from django.core.validators import EmailValidator
 from django.core.exceptions import ValidationError
-from django.contrib.auth.models import User
-
 
 class Categorie(models.Model):
     model_name = models.CharField(max_length=200)
@@ -28,7 +27,6 @@ class Filter_Price(models.Model):
 
 class Product(models.Model):
     STOCK_CHOICES = (('IN STOCK', 'IN STOCK'), ('OUT OF STOCK', 'OUT OF STOCK'))
-
 
     unique_id = models.CharField(unique=True, max_length=200, null=True, blank=True)
     image = models.ImageField(upload_to='Product_images/img')
@@ -59,7 +57,7 @@ class tag(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
-      return self.name
+        return self.name
 
 class CustomUser(models.Model):
     email = models.EmailField(unique=True, validators=[EmailValidator(message="Enter a valid email address.")])
@@ -69,15 +67,47 @@ class CustomUser(models.Model):
         if email_exists:
             raise ValidationError({'email': 'This email address is already in use.'})
 
-
 class Order(models.Model):
+    STATUS_CHOICES = (
+        ('Pending', 'Pending'),
+        ('Confirmed', 'Confirmed'),
+        ('Shipped', 'Shipped'),
+        ('Delivered', 'Delivered'),
+        ('Cancelled', 'Cancelled'),
+    )
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    # Add other fields related to orders
+    products = models.ManyToManyField(Product, through='OrderItem')
+    total_price = models.FloatField(default=0)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"Order #{self.id} - {self.user.username}"
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
+
+    def __str__(self):
+        return f"Order #{self.order.id} - {self.product.name} x {self.quantity}"
 
 class Delivery(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order = models.OneToOneField(Order, on_delete=models.CASCADE)
     # Add other fields related to deliveries
 
 class Wishlist(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # Add other fields related to wishlist
+
+class CartManager(models.Manager):
+    pass
+
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    objects = CartManager()

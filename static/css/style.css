@@ -487,7 +487,7 @@ header {
   display: block; /* Ensure the images are displayed as blocks */
 }
 
-  .footer {
+.footer {
     background-color: #8399ee; /* Light gray background */
     color: #0a0a0a; /* Dark text color */
     padding: 20px;
