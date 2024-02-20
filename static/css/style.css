@@ -149,21 +149,22 @@ header {
 }
 
 .nav2 .nav2-left {
- text-align: center;
   width: 100%;
   flex-basis: auto;
   margin-bottom: 10px;
 }
 
-
+.nav2 .nav2-left h1 {
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin: 0;
+}
 
 .nav2 .nav2-left h1 span {
-  text-align: center;
   color: var(--secondary);
   font-weight: bold;
-  letter-spacing: 1px;
-
-
+  letter-spacing: 2px;
 }
 
 .nav2 .between {
@@ -207,177 +208,65 @@ header {
 }
 
 .nav3 {
-  background-color: #fff; /* Background color */
+  background-color: #333;
   padding: 10px;
-  border-bottom: 2px solid #eee; /* Bottom border */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow */
 }
 
 .nav3 ul {
   list-style: none;
   display: flex;
-  justify-content: space-between; /* Adjust alignment */
-  margin: 0;
-  padding: 0;
+  justify-content: center;
 }
 
 .nav3 li {
+  z-index: 99;
   position: relative;
-  margin: 0;
+  margin: 0 15px;
 }
 
 .nav3 a {
   text-decoration: none;
-  color: #333; /* Text color */
+  color: #fff;
   font-weight: bold;
   font-size: 16px;
-  padding: 10px; /* Adjust padding */
-  transition: color 0.3s; /* Smooth color transition */
 }
 
 .nav3 i {
   margin-right: 5px;
 }
 
-.nav3 li:hover > a {
-  color: #007bff; /* Highlight color on hover */
+.nav3 ul li:hover {
+  color: var(--primary);
 }
 
 .nav3 ul ul {
   display: none;
+  background-color: auto;
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #fff; /* Background color */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
-  border-radius: 4px; /* Rounded corners */
-}
-
-.nav3 ul li:hover > ul {
-  display: block;
-}
-
-
-.nav1, .nav2, .footer {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-}
-
-.nav1 .left h6, .nav2 .nav2-left h1 {
-  margin: 0;
-  font-size: 18px;
-}
-
-.nav1, .nav2 {
-  background-color: #333;
-  color: #fff;
-}
-
-.nav2 .between {
-  flex: 1;
-  display: flex;
-}
-
-.nav2 .between input[type="text"] {
-  width: 150px; /* Adjust the width as needed */
-  padding: 8px;
-}
-
-.nav2 .between button {
-  padding: 8px 15px; /* Adjust the padding as needed */
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  margin-left: 5px; /* Add spacing between input and button */
-}
-
-.footer {
-  background-color: #333;
-  color: #fff;
-  justify-content: center;
-}
-.nav2 {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
+  color: var(--secondary);
   background-color: #8399ee;
+  border-radius: 22px;
 }
 
-.nav2 .nav2-left {
-  display: flex;
-  align-items: center;
+.nav3 li {
+  position: relative;
 }
 
-.nav2 .nav2-left .logo {
-  width: 50px; /* Adjust the width as needed */
-  height: auto;
-  margin-right: 10px; /* Add spacing between the logo and text */
+.nav3 ul ul {
+  z-index: 999;
 }
 
-.nav2 .nav2-right {
-  display: flex;
-  align-items: center;
+.nav3 ul ul {
+  width: 170px;
 }
 
-.search-button {
-  border: #413d3d solid 0.5px;
-  border-radius: 9px;
-  margin-left: 3px;
-}
-
-.search-button:hover {
-  background-color: rgb(202, 194, 194);
-}
-
-
-
-.nav2 .nav2-right button {
-  margin-left: 20px; /* Add spacing between the search button and login/register button */
-}
-
-
-.featured img {
-  width: 100%;
-  max-height: 450px;
-  object-fit: cover;
-}
-.filter-container {
-  background-color: #f4f4f4;
-  padding: 20px;
-  border-bottom: 1px solid #ccc;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
+.nav3 ul li:hover>ul {
   display: block;
-  margin-bottom: 5px;
 }
 
-input[type="text"],
-input[type="number"],
-select {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-button {
-  padding: 10px 15px;
-  background-color: #ba0a22;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  text-decoration: none;
-}
-
+/* Merged styles from the previous code */
 
 
 @media only screen and (max-width: 1200px) {
@@ -411,216 +300,262 @@ button {
   .nav2 .nav2-left {
     text-align: center;
   }
-
 }
-.navbar {
-  justify-content: space-between;
-}
-
-.navbar .login-register {
-  display: flex;
-  align-items: center;
-}
-
-.navbar .login-register a {
-  color: #333;
-  text-decoration: none;
-  margin-left: 20px;
-}
-
-.search-form {
-  width: 200px; /* Adjust width as needed */
-  margin-left: 15px; /* Adjust margin as needed */
-  justify-content: flex-start;
-}
-
 /* Add this to your custom CSS file */
 
-.content {
-  padding: 16px;
-  overflow-y: auto; /* Add scrollbar if content overflows */
+.latest-products-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 20px 0;
 }
 
-.product-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+.product-card {
+    flex: 0 0 auto;
+    margin-right: 20px;
+    width: calc(33.3333% - 20px);
 }
 
-.product-box {
-  text-align: center;
-  border: 1px solid #ddd;
-  padding: 20px;
-  margin-bottom: 20px;
-}
-.product-box:hover{
-  background-color: #8995c4;
-}
-.product-box img{
-  max-height: 200px;
-}
-.product-image {
-  max-width: 100%;
-  height: auto;
+.product-bg {
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.product-name {
-  margin-top: 10px;
-  font-weight: bold;
+.product-detail {
+    padding: 15px;
 }
 
-.stars {
-  color: gold;
+.product-detail h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
 }
 
-.price {
-  margin-top: 10px;
-  font-size: 18px;
-}
-/* here */
-
-.nav2-left {
-  display: flex;
-  align-items: center;
+.product-detail b {
+    font-size: 1.5rem;
+    color: #d9534f;
 }
 
-.logo {
-  width: 50px; /* Adjust the width as needed */
-  height: auto;
-  margin-right: 10px;
-  border-radius: 50%;/* Add spacing between the logo and text */
+.vgth li {
+    font-size: 0.8rem;
 }
 
-.nav2-left h1 {
-  margin: 0;
-  font-size: 28px; /* Increase the font size */
+.float-end.gvi i {
+    font-size: 1.5rem;
+    color: #d9534f;
 }
 
-.filter-button {
-  padding: 10px 20px;
-  background-color: #829fbe;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  margin-left: 10px;
+.product-detail button {
+    font-size: 1rem;
 }
 
-.filter-button:hover {
-  background-color: #7d8792;
-}
-.search-button {
-  border: #413d3d solid 0.5px;
-  border-radius: 9px;
-  margin-left: 3px;
+/* Responsive adjustments for horizontal layout */
+@media (max-width: 1200px) {
+    .product-card {
+        width: calc(50% - 20px);
+    }
 }
 
-.search-button:hover {
-  background-color: rgb(202, 194, 194);
+@media (max-width: 768px) {
+    .product-card {
+        width: calc(100% - 20px);
+        margin-right: 0;
+    }
 }
 
-.nav2 .between {
-  display: flex;
-  justify-content: flex-end; /* Align items to the right */
-  align-items: center;
-  flex: 1;
+
+
+
+.latest-products-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 20px 0;
 }
 
-.nav2 {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #a6adcc;
+.product-card {
+    flex: 0 0 auto;
+    margin-right: 20px;
+    width: calc(33.3333% - 20px);
+    height: 350px;
+    overflow: hidden;
 }
 
-.nav2 .nav2-left {
-  display: flex;
-  align-items: center;
+.product-bg {
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.nav2 .nav2-left .logo {
-  width: 50px; /* Adjust the width as needed */
-  height: auto;
-  margin-right: 10px; /* Add spacing between the logo and text */
+.product-detail {
+    height: 100%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.nav2 .nav2-right {
-  display: flex;
-  align-items: center;
+.product-detail h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
 }
 
-.search-button {
-  border: #413d3d solid 0.5px;
-  border-radius: 9px;
-  margin-left: 3px;
+.product-detail b {
+    font-size: 1.5rem;
+    color: #d9534f;
 }
 
-.search-button:hover {
-  background-color: rgb(202, 194, 194);
+.vgth li {
+    font-size: 0.8rem;
 }
 
-.nav2 .nav2-right button {
-  margin-left: 10px;
-  text-decoration: none;
-   /* Add spacing between the search button and login/register button */
-}
-/* shop now in user section */
-
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+.float-end.gvi i {
+    font-size: 1.5rem;
+    color: #d9534f;
 }
 
-.product {
-  border: 1px solid #ddd;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
+.product-detail button {
+    font-size: 1rem;
 }
 
-.product-image {
-  width: 100%;
-  max-height: 200px;
-  object-fit: cover;
-  border-radius: 5px;
+
+@media (max-width: 1200px) {
+    .product-card {
+        width: calc(50% - 20px);
+    }
 }
 
-.product-name {
-  margin-top: 10px;
-  font-weight: bold;
+@media (max-width: 768px) {
+    .product-card {
+        width: calc(100% - 20px);
+        margin-right: 0;
+    }
 }
 
-.product-price {
-  margin-top: 5px;
-  color: #888;
+
+.product-card {
+  flex: 0 0 calc(15% - 30px); /* Adjust as needed */
+  margin-bottom: 20px; /* Adjust as needed */
+  position: relative; /* Add position relative for absolute positioning of buttons */
+  overflow: hidden; /* Ensure content doesn't overflow */
+  border: 1px solid #ccc; /* Add a border */
+  border-radius: 5px; /* Add border radius for a softer look */
 }
 
-.btn {
-  margin-top: 10px;
-  padding: 10px 20px;
+.product-card:hover {
+  background-color: #f0f0f0; /* Change background color slightly on hover */
+}
+
+.product-detail {
+  padding: 10px; /* Add padding for spacing */
+}
+
+.product-detail h4 {
+  margin-bottom: 10px; /* Add margin bottom for spacing */
+}
+
+.product-detail .btn {
+  width: 100%; /* Set button width to 100% */
+  padding: 10px; /* Add padding for spacing */
+  border: none; /* Remove default button border */
+  border-radius: 5px; /* Add border radius for a softer look */
+  cursor: pointer; /* Add cursor pointer for usability */
+}
+
+.product-detail .btn:hover {
+  background-color: #ff6347; /* Change button background color on hover */
+  color: #fff; /* Change button text color on hover */
+}
+
+
+.slider {
+  border: 1px solid #ccc; /* Add a mild border */
+  border-radius: 5px; /* Add border radius for a softer look */
+  overflow: hidden; /* Ensure content inside the slider doesn't overflow */
+}
+
+.slide {
+  display: none; /* Hide all slides by default */
+}
+
+.slide.active {
+  display: block; /* Show only the active slide */
+}
+
+.slide img {
+  width: 100%; /* Make the images responsive */
+  display: block; /* Ensure the images are displayed as blocks */
+}
+
+  .footer {
+    background-color: #8399ee; /* Light gray background */
+    color: #0a0a0a; /* Dark text color */
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .footer-left {
+    margin-bottom: 10px; /* Add margin to separate social buttons from contact info */
+  }
+
+  .footer-left i {
+    font-size: 20px;
+    margin-right: 10px; /* Add margin between social buttons */
+  }
+
+  .footer-right {
+    margin-top: 10px; /* Add margin to separate copyright text from social buttons */
+  }
+
+  .left h6 {
+    margin-right: 10px; /* Adjust margin as needed */
+    color: #333; /* Change color as needed */
+    font-weight: bold; /* Add font-weight as needed */
+    text-decoration: none; /* Remove underline */
+    cursor: pointer; /* Add pointer cursor */
+    transition: color 0.3s; /* Add smooth color transition */
+}
+
+.left h6:hover {
+    color: #555; /* Change hover color as needed */
+}
+
+.cart-button {
+    background-color: #555; /* Change background color as needed */
+    color: #fff; /* Change text color as needed */
+    padding: 10px 15px; /* Adjust padding as needed */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Add border radius */
+    cursor: pointer; /* Add pointer cursor */
+    transition: background-color 0.3s; /* Add smooth background color transition */
+}
+
+.cart-button:hover {
+    background-color: #777; /* Change hover background color as needed */
+}
+
+ /* Style for the login/register button */
+ .login-register-btn {
   background-color: #007bff;
   color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
 }
 
-.btn:hover {
-  background-color: #0056b3;
-}
-.nav1 .left .register a,
-.nav2 .between button.search-button {
-  background-color: #f5f5dc; /* Beige-ish color */
-  color: #333; /* Text color */
-  border: none;
-  text-decoration: none; /* Remove underline */
+/* Style for the view cart button */
+.cart-button {
+  background-color: #28a745;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
 }
 
-.nav1 .left .register a:hover,
-.nav2 .between button.search-button:hover {
-  background-color: #dcdcbf; /* Darker shade on hover */
-}
-.search-bar {
-    width: 1000px; /* Adjust the width as needed */
+/* Style for social media icons in the footer */
+.footer-left i {
+  margin-right: 10px;
 }
