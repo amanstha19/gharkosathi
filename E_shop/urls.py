@@ -22,7 +22,7 @@ urlpatterns = [
     path('product/<int:category_id>/', views.product, name='product'),
     path('cart/cart_detail/', views.cart_detail, name='cart'),
     path('cart/add/<int:product_id>/', views.cart_add, name='cart_add'),
-    path('userprofile/', views.userprofile,name='userprofile'),# Define cart_add URL pattern
+    path('userprofile/', views.userprofile,name='userprofile'),
 ]
 
 if settings.DEBUG:

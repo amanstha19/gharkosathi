@@ -3,9 +3,18 @@
 {% block content %}
 
 {% load static %}
-
 <div class="featured">
-    <img src="{% static 'images/img.jpg' %}" alt="" class="featured-image">
+    <img src="{% static 'images/img.jpg' %}" alt="">
+<div class="slider">
+    <div class="slide">
+        <img src="{% static 'images/offer1.png' %}" alt="Slider Image 1">
+    </div>
+    <div class="slide">
+        <img src="{% static 'images/offer2.png' %}" alt="Slider Image 2">
+    </div>
+    <div class="slide">
+        <img src="{% static 'images/offer3.png' %}" alt="Slider Image 3">
+    </div>
 </div>
 
 <div class="latest-products pt-5 pb-0">
@@ -86,6 +95,30 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+    <script>
+    $(document).ready(function() {
+        var currentSlide = 0;
+        var slides = $('.slide');
+
+        function showSlide(index) {
+            slides.removeClass('active');
+            slides.eq(index).addClass('active');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        // Auto slide change (every 5 seconds)
+        setInterval(nextSlide, 5000);
+    });
+</script>
     $(document).ready(function() {
         $('.add-to-cart').click(function(e) {
             e.preventDefault();

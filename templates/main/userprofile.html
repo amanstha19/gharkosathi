@@ -71,12 +71,18 @@
             <!-- Wishlist Section -->
             <div class="wishlist-section">
                 <h3>Wishlist</h3>
-                <div class="wishlist-items">
-                    {% for product in wishlist.products.all %}
-                    <p>{{ product.name }} - Rs {{ product.price }}</p>
-                    {% empty %}
-                    <p>No items added to wishlist yet.</p>
-                    {% endfor %}
+              <div id="products">
+    {% for key, value in request.session.cart.items %}
+    <div class="product" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; background-color: #f9f9f9;">
+      <h5>{{ value.name | truncatewords:10 }}</h5>
+      <img src="{{ value.image }}" width="120" height="100">
+
+      <p>Price: ₹{{ value.price }}</p>
+      <button class="add-to-cart-btn" data-product="{{ key }}" data-name="{{ value.name }}" data-price="{{ value.price }}" style="padding: 5px 10px; background-color: #007bff; color: #fff; border: none; cursor: pointer;">Add to Cart</button>
+    </div>
+    {% endfor %}
+  </div>
+  <
                 </div>
             </div>
 
@@ -189,6 +195,23 @@
         position: fixed;
         bottom: 0;
         width: 100%;
+        
+        
+        
+        .product {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    float: left; /* Align items to the left */
+    width: 100%; /* Ensures each item takes full width */
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+}
+
+.product img {
+    display: block;
+    margin: 0 auto; /* Center the image horizontally */
+}
     }
 </style>
 
