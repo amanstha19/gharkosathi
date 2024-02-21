@@ -559,3 +559,66 @@ header {
 .footer-left i {
   margin-right: 10px;
 }
+
+/* details page style */
+
+/* CSS for product detail page */
+.product-detail-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.product-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.product-description {
+  margin-left: 20px;
+  flex: 1; /* Take remaining space */
+}
+
+.product-description h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.product-description p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.product-description ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.product-description ul li {
+  font-size: 14px;
+}
+
+.similar-products {
+  margin-left: 20px;
+  flex: 1; /* Take remaining space */
+}
+
+.similar-products h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.scrollable-products {
+  display: flex;
+  overflow-x: auto; /* Enable horizontal scrolling */
+}
+
+.product-thumbnail {
+  margin-right: 10px;
+}
+
+.product-thumbnail img {
+  max-width: 100px; /* Adjust thumbnail size as needed */
+  height: auto;
+}

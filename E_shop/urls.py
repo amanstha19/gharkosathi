@@ -24,6 +24,7 @@ urlpatterns = [
     path('cart/add/<int:product_id>/', views.cart_add, name='cart_add'),
     path('userprofile/', views.userprofile,name='userprofile'),
     path('checkout/', views.checkout, name='checkout'),
+    path('help/', views.help_page, name='help'),
 ]
 
 if settings.DEBUG:
