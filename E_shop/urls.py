@@ -6,12 +6,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from .views import AuthView
 
+from cart.cart import Cart
+import json
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.HOME, name='home'),
     path('index/', views.index, name="index"),
-
     path('base/', views.BASE, name='base'),
     path('product/', views.product, name='product'),
     path('register/', views.register, name='register'),
@@ -22,8 +25,10 @@ urlpatterns = [
     path('product/<int:category_id>/', views.product, name='product'),
     path('cart/cart_detail/', views.cart_detail, name='cart'),
     path('cart/add/<int:product_id>/', views.cart_add, name='cart_add'),
-    path('userprofile/', views.userprofile,name='userprofile'),
+    path('userprofile/', views.userprofile, name='userprofile'),
     path('checkout/', views.checkout, name='checkout'),
+    path('cart_clear/', views.cart_clear, name='cart_clear'),
+    path('place_order/', views.place_order, name='place_order')
 ]
 
 if settings.DEBUG:

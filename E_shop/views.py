@@ -9,6 +9,7 @@ from django.core.exceptions import ValidationError
 from cart.cart import Cart
 from store_app.models import Order, Delivery, Wishlist,OrderItem
 from django.contrib.auth import login
+from django.http import HttpResponse
 
 
 def index(request):
@@ -161,9 +162,18 @@ def cart_clear(request):
 
 @login_required(login_url="/main/register/auth/")
 def cart_detail(request):
-    return render(request, 'cart/cart_detail.html')
+    cart = Cart(request)
+    total_price = calculate_total_price(cart)  # Calculate total price
+    return render(request, 'cart/cart_detail.html', {'cart': cart, 'total_price': total_price})
 
 
+# Calculate total price based on items in the cart
+def calculate_total_price(cart):
+    total_price = 0
+    for product_id, item in cart.cart.items():
+        product = Product.objects.get(id=product_id)
+        total_price += product.price * item['quantity']
+    return total_price
 
 
 @login_required
@@ -183,59 +193,20 @@ def userprofile(request):
     return render(request, 'main/userprofile.html', context)
 
 
-from django.db import transaction
-
-@login_required(login_url="/main/register/auth/")
 def checkout(request):
     if request.method == "POST":
         try:
             # Retrieve form data
-            items_json = request.POST.get('itemsJson', '')
-            name = request.POST.get('name', '')
-            email = request.POST.get('email', '')
-            address = request.POST.get('address1', '') + " " + request.POST.get('address2', '')
-            city = request.POST.get('city', '')
-            state = request.POST.get('state', '')
-            zip_code = request.POST.get('zip_code', '')
-            phone = request.POST.get('phone', '')
+            # Your existing code here...
 
-            # Parse the JSON data to retrieve product ID and quantity
-            items_data = json.loads(items_json)
+            # Calculate total price from items in the cart
+            cart_items = Cart.objects.filter(user=request.user)
+            total_price = sum(item.product.price * item.quantity for item in cart_items)
 
-            # Create an order within a transaction
-            with transaction.atomic():
-                order = Order.objects.create(
-                    user=request.user,
-                    total_price=0,  # You need to calculate this based on the items
-                    status='Pending',
-                    # Other fields...
-                )
+            # Your existing code here...
 
-                # Add order items
-                total_price = 0
-                for item_data in items_data:
-                    # Retrieve product ID and quantity from JSON data
-                    product_id = item_data['product_id']
-                    quantity = item_data['quantity']
-
-                    # Get the product
-                    product = Product.objects.get(id=product_id)
-
-                    # Create an order item
-                    order_item = OrderItem.objects.create(
-                        order=order,
-                        product=product,
-                        quantity=quantity
-                    )
-
-                    total_price += product.price * quantity
-
-                # Update total price for the order
-                order.total_price = total_price
-                order.save()
-
-            # Render the checkout page with a thank you message and order ID
-            return render(request, 'register/success.html', {'thank': True, 'id': order.id})
+            # Render the checkout page with a thank you message, order ID, and total price
+            return render(request, 'register/success.html', {'thank': True, 'id': order.id, 'total_price': total_price})
 
         except Exception as e:
             # Handle any errors that occur during form submission
@@ -243,3 +214,21 @@ def checkout(request):
 
     # Render the checkout page if the request method is not POST
     return render(request, 'register/checkout.html')
+def update_total_price(request):
+    # Check if the request is a POST request and has the 'HTTP_X_REQUESTED_WITH' header set to 'XMLHttpRequest'
+    if request.method == "POST" and request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+        # Calculate total price here
+        cart = Cart(request)
+        total_price = calculate_total_price(cart)
+
+        return JsonResponse({'total_price': total_price})
+    else:
+        # Handle non-AJAX requests appropriately
+        # For example, return a 404 Not Found response
+        return JsonResponse({'error': 'Not Found'}, status=404)
+
+
+
+def place_order(request):
+    # Logic to handle placing an order
+    return HttpResponse("Order placed successfully")
