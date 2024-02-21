@@ -133,11 +133,17 @@ def cart_add(request, product_id):
 
 
 @login_required(login_url="/main/register/auth/")
+@login_required(login_url="/main/register/auth/")
 def item_clear(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
     cart.remove(product)
-    return redirect("cart_detail")
+
+    # Calculate total price after removing the item
+    total_price = calculate_total_price(cart)
+
+    # Return JSON response with updated total price
+    return JsonResponse({'total_price': total_price})
 
 
 @login_required(login_url="/main/register/auth/")
@@ -235,3 +241,13 @@ def update_total_price(request):
 def place_order(request):
     # Logic to handle placing an order
     return HttpResponse("Order placed successfully")
+
+from django.shortcuts import render
+
+
+def remove_from_cart(request, product_id):
+    if request.method == "POST" and request.user.is_authenticated:
+        cart = Cart(request)
+        product = Product.objects.get(id=product_id)  # Assuming you have a Product model
+        cart.remove(product)
+        return render(request, 'cart/cart_detail.html', {'cart': cart})

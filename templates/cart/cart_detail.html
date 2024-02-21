@@ -42,99 +42,30 @@
       <label for="quantity">Quantity:</label>
       <input type="number" id="quantity_{{ key }}" name="quantity" min="1" value="1" class="quantity-input">
 
-      <button class="remove-all-from-cart-btn" data-product="{{ key }}" style="padding: 5px 10px; background-color: #dc3545; color: #fff; border: none; cursor: pointer;">Remove</button>
+      <!-- Form for deletion -->
+      <form action="{% url 'remove-from-cart' key %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="remove-all-from-cart-btn" style="padding: 5px 10px; background-color: #dc3545; color: #fff; border: none; cursor: pointer;">Remove</button>
+      </form>
     </div>
     {% endfor %}
   </div>
 
   <div id="cart" style="border: 1px solid #ccc; padding: 10px; margin-top: 20px; background-color: #f9f9f9;">
     <h2>Checkout</h2>
-    <ul id="cart-items" style="list-style-type: none; padding: 0;"></ul>
+    <ul id="cart-items" style="list-style-type: none; padding: 0;">
+      <!-- Cart items will be dynamically added here -->
+    </ul>
    
     <form id="checkout-form" action="{% url 'checkout' %}" method="post">
         {% csrf_token %}
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
         <input type="hidden" name="total_price" id="total_price_input" value="0">
-        <button type="submit" class="btn mb-2 fw-bold w-100 btn-danger" id="buy-now-btn">proceed </button>
+        <button type="submit" class="btn mb-2 fw-bold w-100 btn-danger" id="buy-now-btn">Proceed to Checkout</button>
     </form>
   </div>
 
   <div class="clearfix"></div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
-    const cartItemsList = document.getElementById('cart-items');
-    const cartTotal = document.getElementById('cart-total');
-    const totalPriceInput = document.getElementById('total_price_input');
-
-    let totalPrice = 0;
-
-    addToCartBtns.forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        const productId = btn.getAttribute('data-product');
-        const productName = btn.getAttribute('data-name');
-        const productPrice = parseFloat(btn.getAttribute('data-price'));
-        const quantityInput = document.getElementById('quantity_' + productId);
-        const quantity = parseInt(quantityInput.value);
-        const subtotal = productPrice * quantity;
-
-        const listItem = document.createElement('li');
-        listItem.textContent = `${quantity} x ₹${productPrice.toFixed(2)} - ₹${subtotal.toFixed(2)}`;
-
-        // Add remove button
-        const removeBtn = document.createElement('button');
-        removeBtn.textContent = 'Remove All';
-        removeBtn.setAttribute('class', 'remove-all-from-cart-btn');
-        removeBtn.setAttribute('data-product', productId);
-        removeBtn.setAttribute('data-name', productName);
-        listItem.appendChild(removeBtn);
-
-        cartItemsList.appendChild(listItem);
-
-        totalPrice += subtotal;
-        cartTotal.textContent = `₹${totalPrice.toFixed(2)}`;
-        totalPriceInput.value = totalPrice.toFixed(2);
-
-        // Add event listener for remove all button
-        removeBtn.addEventListener('click', function() {
-          const productId = this.getAttribute('data-product');
-          const productName = this.getAttribute('data-name');
-          const itemsToRemove = cartItemsList.querySelectorAll(`[data-product="${productId}"]`);
-
-          itemsToRemove.forEach(function(item) {
-            const productPrice = parseFloat(item.textContent.split('₹')[1]);
-            const quantity = parseInt(item.textContent.split('x')[0]);
-            const subtotal = productPrice * quantity;
-            item.remove();
-            totalPrice -= subtotal;
-          });
-
-          cartTotal.textContent = `₹${totalPrice.toFixed(2)}`;
-          totalPriceInput.value = totalPrice.toFixed(2);
-        });
-      });
-    });
-
-    document.querySelectorAll('.quantity-input').forEach(function(input) {
-      input.addEventListener('change', function() {
-        const productPrice = parseFloat(input.closest('.product').querySelector('.add-to-cart-btn').getAttribute('data-price'));
-        const quantity = parseInt(input.value);
-        const subtotal = productPrice * quantity;
-
-        totalPrice += subtotal;
-        cartTotal.textContent = `₹${totalPrice.toFixed(2)}`;
-        totalPriceInput.value = totalPrice.toFixed(2);
-      });
-    });
-
-    // Submit form when "Buy Now" button is clicked
-    document.getElementById('buy-now-btn').addEventListener('click', function() {
-      document.getElementById('checkout-form').submit();
-    });
-  });
-</script>
-
+</body>
 {% endblock %}

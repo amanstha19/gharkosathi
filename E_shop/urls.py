@@ -5,6 +5,7 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import AuthView
+from .views import item_clear
 
 from cart.cart import Cart
 import json
@@ -30,6 +31,8 @@ urlpatterns = [
 
     path('cart_clear/', views.cart_clear, name='cart_clear'),
     path('place_order/', views.place_order, name='place_order'),
+    path('cart/item_clear/<int:id>/', item_clear, name='item-clear'),
+    path('remove-from-cart/<int:product_id>/', views.remove_from_cart, name='remove-from-cart'),
 
     path('help/', views.help_page, name='help'),
 
