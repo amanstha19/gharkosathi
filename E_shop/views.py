@@ -99,6 +99,9 @@ def user_login(request):
         else:
             return render(request, 'register/auth.html', {'error_message': 'Invalid login credentials'})
 
+def help_page(request):
+    return render(request, 'main/help.html')
+
 
 def user_logout(request):
     logout(request)

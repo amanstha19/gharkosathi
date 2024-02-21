@@ -1,0 +1,89 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<style>
+    .help-section {
+        margin-top: 50px;
+    }
+
+    .faq {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .question {
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        position: relative;
+    }
+
+    .question h3 {
+        cursor: pointer;
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .question h3::after {
+        content: "\25BC"; /* Down arrow character */
+        float: right;
+    }
+
+    .answer {
+        display: none;
+        font-size: 16px;
+        color: #666;
+    }
+
+    .answer.active {
+        display: block;
+    }
+
+    .answer p {
+        margin-top: 5px;
+    }
+
+    .question.active .answer {
+        display: block;
+    }
+</style>
+
+<div class="help-section">
+    <h2>Need Help?</h2>
+    <div class="faq">
+        <div class="question">
+            <h3>How can I place an order?</h3>
+            <div class="answer">
+                <p>To place an order, simply browse our collection of gifts, select the item you want, and proceed to checkout. Follow the prompts to enter your delivery details and payment information.</p>
+            </div>
+        </div>
+        <div class="question">
+            <h3>Can I schedule a specific delivery time?</h3>
+            <div class="answer">
+                <p>Yes, during the checkout process, you can specify a preferred delivery date and time. We'll do our best to accommodate your request, but please note that delivery slots may be subject to availability.</p>
+            </div>
+        </div>
+        <!-- Add more FAQs as needed -->
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const questions = document.querySelectorAll('.question');
+
+        questions.forEach(function(question) {
+            const answer = question.querySelector('.answer');
+
+            question.addEventListener('click', function() {
+                question.classList.toggle('active');
+                answer.classList.toggle('active');
+            });
+        });
+    });
+</script>
+{% endblock %}
