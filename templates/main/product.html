@@ -96,13 +96,17 @@
             <div class="filter-btns">
                 <h3 style="color: #333;">Categories</h3>
                 <div class="filter-btn-group">
-                    <button class="filter-btn active" data-filter="all">All</button>
+                    <a href="/product/ "> <button class="filter-btn active" data-filter="all">All</button> </a>
+                    
                     {% for category in categories %}
-                    <button class="filter-btn" data-filter="{{ category.id }}">{{ category.model_name }}</button>
+                      <a href="/product/?category={{ category.id }}" > <button class="filter-btn" data-filter="{{ category.id }}">{{ category.model_name }}</button> </a>
                     {% endfor %}
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
         
         <div class="col-md-9">
             <div class="mt-3" style="background-color: #f8f9fa; padding: 10px;">

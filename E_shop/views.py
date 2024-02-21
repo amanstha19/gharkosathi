@@ -40,6 +40,14 @@ def HOME(request):
 def product(request):
     products = Product.objects.all()
     categories = Categorie.objects.all()
+    CATID = request.GET.get('category')
+    if CATID:
+        products =Product.objects.filter( categorie=CATID)
+    else:
+        products = Product.objects.all()
+
+
+
     context = {
         'products': products,
         'categories': categories,
