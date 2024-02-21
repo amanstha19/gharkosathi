@@ -156,8 +156,7 @@ def cart_detail(request):
     return render(request, 'cart/cart_detail.html')
 
 
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+
 
 @login_required
 def userprofile(request):
@@ -176,56 +175,63 @@ def userprofile(request):
     return render(request, 'main/userprofile.html', context)
 
 
+from django.db import transaction
 
 @login_required(login_url="/main/register/auth/")
 def checkout(request):
     if request.method == "POST":
-        # Retrieve form data
-        items_json = request.POST.get('itemsJson', '')
-        name = request.POST.get('name', '')
-        email = request.POST.get('email', '')
-        address = request.POST.get('address1', '') + " " + request.POST.get('address2', '')
-        city = request.POST.get('city', '')
-        state = request.POST.get('state', '')
-        zip_code = request.POST.get('zip_code', '')
-        phone = request.POST.get('phone', '')
+        try:
+            # Retrieve form data
+            items_json = request.POST.get('itemsJson', '')
+            name = request.POST.get('name', '')
+            email = request.POST.get('email', '')
+            address = request.POST.get('address1', '') + " " + request.POST.get('address2', '')
+            city = request.POST.get('city', '')
+            state = request.POST.get('state', '')
+            zip_code = request.POST.get('zip_code', '')
+            phone = request.POST.get('phone', '')
 
-        # Create an order
-        order = Order.objects.create(
-            user=request.user,
-            total_price=0,  # You need to calculate this based on the items
-            status='Pending',
-            # Other fields...
-        )
-
-        # Add order items
-        items = []  # To store order items for later calculation of total price
-        for item_json in items_json:
             # Parse the JSON data to retrieve product ID and quantity
-            product_id = item_json['product_id']
-            quantity = item_json['quantity']
+            items_data = json.loads(items_json)
 
-            # Get the product
-            product = Product.objects.get(id=product_id)
+            # Create an order within a transaction
+            with transaction.atomic():
+                order = Order.objects.create(
+                    user=request.user,
+                    total_price=0,  # You need to calculate this based on the items
+                    status='Pending',
+                    # Other fields...
+                )
 
-            # Create an order item
-            order_item = OrderItem.objects.create(
-                order=order,
-                product=product,
-                quantity=quantity
-            )
+                # Add order items
+                total_price = 0
+                for item_data in items_data:
+                    # Retrieve product ID and quantity from JSON data
+                    product_id = item_data['product_id']
+                    quantity = item_data['quantity']
 
-            items.append(order_item)
+                    # Get the product
+                    product = Product.objects.get(id=product_id)
 
-        # Calculate total price based on order items
-        total_price = sum(item.product.price * item.quantity for item in items)
-        order.total_price = total_price
-        order.save()
+                    # Create an order item
+                    order_item = OrderItem.objects.create(
+                        order=order,
+                        product=product,
+                        quantity=quantity
+                    )
 
-        # Render the checkout page with a thank you message and order ID
-        return render(request, 'register/checkout.html', {'thank': True, 'id': order.id})
+                    total_price += product.price * quantity
+
+                # Update total price for the order
+                order.total_price = total_price
+                order.save()
+
+            # Render the checkout page with a thank you message and order ID
+            return render(request, 'register/success.html', {'thank': True, 'id': order.id})
+
+        except Exception as e:
+            # Handle any errors that occur during form submission
+            return render(request, 'register/checkout.html', {'error_message': str(e)})
 
     # Render the checkout page if the request method is not POST
     return render(request, 'register/checkout.html')
-
-

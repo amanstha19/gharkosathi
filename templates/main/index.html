@@ -30,13 +30,13 @@
                             
                             
                             <div class="row pt-2">
-    <div class="col-md-6">
+      <div class="col-md-6">
         <form action="{% url 'checkout' %}" method="post">
             {% csrf_token %}
             <input type="hidden" name="product_id" value="{{ product.id }}">
             <button type="submit" class="btn mb-2 fw-bold w-100 btn-danger">Buy Now</button>
         </form>
-    </div>
+          </div>
                             
                             
                                 <div class="col-md-6">

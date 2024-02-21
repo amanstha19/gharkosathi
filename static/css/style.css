@@ -492,7 +492,7 @@ header {
     color: #0a0a0a; /* Dark text color */
     padding: 20px;
     text-align: center;
-    position: fixed;
+    position: relative;
     bottom: 0;
     width: 100%;
   }

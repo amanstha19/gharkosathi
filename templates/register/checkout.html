@@ -3,7 +3,7 @@
 {% block content %}
 <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
     <div style="width: 50%;">
-        <form method="post" action="/shop/checkout/" style="margin-bottom: 20px;">
+        <form method="post" action="/checkout/" style="margin-bottom: 20px;">
             {% csrf_token %}
             <input type="hidden" name="itemsJson" id="itemsJson">
             <div style="margin-bottom: 20px;">
