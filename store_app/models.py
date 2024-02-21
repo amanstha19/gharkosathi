@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.core.validators import EmailValidator
 from django.core.exceptions import ValidationError
 
+
 class Categorie(models.Model):
     model_name = models.CharField(max_length=200)
 
@@ -75,12 +76,32 @@ class Order(models.Model):
         ('Delivered', 'Delivered'),
         ('Cancelled', 'Cancelled'),
     )
+    PAYMENT_METHOD_CHOICES = (
+        ('Credit Card', 'Credit Card'),
+        ('Debit Card', 'Debit Card'),
 
+        ('Cash on Delivery', 'Cash on Delivery'),
+        # Add more payment methods as needed
+    )
+
+    product = models.ForeignKey(Product, related_name='orders', on_delete=models.CASCADE, default=1)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    products = models.ManyToManyField(Product, through='OrderItem')
-    total_price = models.FloatField(default=0)
+    firstname = models.CharField(max_length=100, default='')
+    lastname = models.CharField(max_length=100,default='')
+    address = models.TextField(max_length=100, default='x')
+
+    city = models.CharField(max_length=100,default='')
+    phone = models.IntegerField(default='0')
+
+    email = models.EmailField(max_length=100,default='')
+    amount = models.CharField(max_length=20, default=(0.0))   # Add max_length attribute here
+
+
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
     created_at = models.DateTimeField(default=timezone.now)
+    deleted = models.BooleanField(default=False)  # Field to indicate deletion status
+    payment_done = models.BooleanField(default=False)  # Field to indicate whether payment is done
+    payment_method = models.CharField(max_length=20, choices=PAYMENT_METHOD_CHOICES, default='Cash on Delivery')  # Field for payment method
 
     def __str__(self):
         return f"Order #{self.id} - {self.user.username}"
@@ -88,10 +109,14 @@ class Order(models.Model):
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField()
+    images = models.ImageField(upload_to="Product_images/Order_Img",default='')
+    quantity = models.CharField(max_length=20, default=0)
+    price = models.CharField(max_length=20, default='0')
+    total = models.CharField(max_length=10000, default='0')
+
 
     def __str__(self):
-        return f"Order #{self.order.id} - {self.product.name} x {self.quantity}"
+       return self.order.user.username
 
 class Delivery(models.Model):
     order = models.OneToOneField(Order, on_delete=models.CASCADE)
@@ -111,3 +136,9 @@ class Cart(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     objects = CartManager()
+
+
+class Payment(models.Model):
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_method = models.CharField(max_length=100)
+    payment_date = models.DateTimeField(auto_now_add=True)

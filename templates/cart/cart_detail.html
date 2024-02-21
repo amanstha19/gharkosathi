@@ -2,14 +2,27 @@
 
 {% block content %}
 <body>
+  <style>
+    /* Custom styles for the quantity input */
+    .quantity-input {
+      width: 60px; /* Adjust width as needed */
+      height: 40px; /* Adjust height as needed */
+      background-color: lightgray; /* Set background color */
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+    }
+  </style>
+
   <div id="products">
     {% for key, value in request.session.cart.items %}
     <div class="product" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; background-color: #f9f9f9;">
       <h5>{{ value.name | truncatewords:10 }}</h5>
       <img src="{{ value.image }}" width="120" height="100">
-
       <p>Price: ₹{{ value.price }}</p>
-      <button class="add-to-cart-btn" data-product="{{ key }}" data-name="{{ value.name }}" data-price="{{ value.price }}" style="padding: 5px 10px; background-color: #007bff; color: #fff; border: none; cursor: pointer;">Add to Cart</button>
+      <label for="quantity">Quantity:</label>
+      <input type="number" id="quantity_{{ key }}" name="quantity" min="1" value="1" class="quantity-input">
+      <button class="add-to-cart-btn" data-product="{{ key }}" data-name="{{ value.name }}" data-price="{{ value.price }}" style="padding: 5px 10px; background-color: #007bff; color: #fff; border: none; cursor: pointer;">Add</button>
     </div>
     {% endfor %}
   </div>
@@ -17,39 +30,56 @@
     <h2>Cart</h2>
     <ul id="cart-items" style="list-style-type: none; padding: 0;"></ul>
     <p>Total: <span id="cart-total">₹0.00</span></p>
+        <form action="{% url 'checkout' %}" method="post">
+            {% csrf_token %}
+         <button type="submit" class="btn mb-2 fw-bold w-100 btn-danger">Buy Now</button>
+        </form>
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
-      const cartItemsList = document.getElementById('cart-items');
-      const cartTotal = document.getElementById('cart-total');
+  document.addEventListener('DOMContentLoaded', function() {
+    const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
+    const cartItemsList = document.getElementById('cart-items');
+    const cartTotal = document.getElementById('cart-total');
 
-      let totalPrice = 0;
+    let totalPrice = 0;
 
-      addToCartBtns.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          const productId = btn.getAttribute('data-product');
-          const productName = btn.getAttribute('data-name');
-          const productPrice = parseFloat(btn.getAttribute('data-price'));
+    addToCartBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const productId = btn.getAttribute('data-product');
+        const productName = btn.getAttribute('data-name');
+        const productPrice = parseFloat(btn.getAttribute('data-price'));
+        const quantityInput = document.getElementById('quantity_' + productId);
+        const quantity = parseInt(quantityInput.value);
 
-          const listItem = document.createElement('li');
-          const deleteButton = document.createElement('button');
-          deleteButton.textContent = 'Delete';
-          deleteButton.style.marginLeft = '10px';
-          deleteButton.onclick = function() {
-            cartItemsList.removeChild(listItem);
-            totalPrice -= productPrice;
-            cartTotal.textContent = `₹${totalPrice.toFixed(2)}`;
-          };
-          listItem.textContent = `${productName} - ₹${productPrice.toFixed(2)}`;
-          listItem.appendChild(deleteButton);
-          cartItemsList.appendChild(listItem);
-          totalPrice += productPrice;
-          cartTotal.textContent = `₹${totalPrice.toFixed(2)}`;
-        });
+        // Calculate subtotal for the current item
+        const subtotal = productPrice * quantity;
+
+        // Add the item to the cart list
+        const listItem = document.createElement('li');
+        listItem.textContent = `${productName} x ${quantity} - ₹${subtotal.toFixed(2)}`;
+        cartItemsList.appendChild(listItem);
+
+        // Update total price
+        totalPrice += subtotal;
+        cartTotal.textContent = `₹${totalPrice.toFixed(2)}`;
       });
     });
-  </script>
+
+    // Update total price when quantity changes
+    document.querySelectorAll('.quantity-input').forEach(function(input) {
+      input.addEventListener('change', function() {
+        const productPrice = parseFloat(input.closest('.product').querySelector('.add-to-cart-btn').getAttribute('data-price'));
+        const quantity = parseInt(input.value);
+        const subtotal = productPrice * quantity;
+
+        // Update total price
+        totalPrice += subtotal;
+        cartTotal.textContent = `₹${totalPrice.toFixed(2)}`;
+      });
+    });
+  });
+</script>
+
 </body>
 {% endblock %}

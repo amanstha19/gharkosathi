@@ -31,10 +31,10 @@
                             
                             <div class="row pt-2">
       <div class="col-md-6">
-        <form action="{% url 'checkout' %}" method="post">
+        <form action="{% url 'cart' %}" method="post">
             {% csrf_token %}
             <input type="hidden" name="product_id" value="{{ product.id }}">
-            <button type="submit" class="btn mb-2 fw-bold w-100 btn-danger">Buy Now</button>
+            <button type="submit" class="btn mb-2 fw-bold w-100 btn-danger">View your cart </button>
         </form>
           </div>
                             
@@ -42,7 +42,7 @@
                                 <div class="col-md-6">
                                     <form class="add-to-cart-form" data-product-id="{{ prod.id }}">
                                         {% csrf_token %}
-                                        <button type="button" class="add-to-cart btn fw-bold w-100 btn-outline-danger">Add to Cart</button>
+                                        <button type="button" class="add-to-cart btn fw-bold w-100 btn-outline-danger">Whishlist</button>
                                     </form>
                                 </div>
                             </div>
