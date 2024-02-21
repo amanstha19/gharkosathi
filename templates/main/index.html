@@ -57,37 +57,44 @@
 </div>
 
 <style>
-    .filter-btn-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px; /* Adjust as needed */
-    }
+   .filter-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px; /* Adjust as needed */
+}
 
-    .filter-btn {
-        /* Add your button styles here */
-    }
+.filter-btn {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
-    .flex-row {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between; /* or any other alignment you prefer */
-    }
+.filter-btn:hover {
+    background-color: #0056b3;
+}
 
-    .product-card {
-        flex: 0 0 calc(15% - 30px); /* Adjust as needed */
-        margin-bottom: 20px; /* Adjust as needed */
-    }
-    
-    .featured-image {
-        max-width: 100%; /* Adjust as needed */
-        height: auto;
-    }
-    
-    .product-image {
-        max-width: 100%; /* Ensure the image doesn't exceed the container width */
-        height: auto; /* Allow the height to adjust dynamically based on the image's aspect ratio */
-        object-fit: cover; /* Cover the entire container with the image, maintaining aspect ratio */
-    }
+.flex-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* or any other alignment you prefer */
+}
+
+.product-card {
+    flex: 0 0 calc(30% - 30px); /* Adjust as needed */
+    margin-bottom: 20px; /* Adjust as needed */
+}
+
+.product-image {
+    width: 90%; /* Ensure the image doesn't exceed the container width */
+    max-height: 150px; /* Allow the height to adjust dynamically based on the image's aspect ratio */
+    object-fit: contain; /* Fit the entire image within the container, maintaining aspect ratio */
+    margin-bottom: 10px; /* Add some bottom margin */
+}
+
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>

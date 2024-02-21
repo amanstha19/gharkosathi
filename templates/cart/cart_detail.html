@@ -2,6 +2,7 @@
 
 {% block content %}
 <body>
+  
   <style>
     /* Custom styles for the quantity input */
     .quantity-input {
@@ -11,6 +12,24 @@
       border: none;
       border-radius: 5px;
       text-align: center;
+    }
+
+    /* Positioning the cart on the right side */
+    #products {
+      float: left;
+      width: 70%; /* Adjust as needed */
+    }
+
+    #cart {
+      float: right;
+      width: 30%; /* Adjust as needed */
+    }
+
+    /* Clear float */
+    .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
     }
   </style>
 
@@ -26,6 +45,7 @@
     </div>
     {% endfor %}
   </div>
+
   <div id="cart" style="border: 1px solid #ccc; padding: 10px; margin-top: 20px; background-color: #f9f9f9;">
     <h2>Cart</h2>
     <ul id="cart-items" style="list-style-type: none; padding: 0;"></ul>
@@ -35,6 +55,8 @@
          <button type="submit" class="btn mb-2 fw-bold w-100 btn-danger">Buy Now</button>
         </form>
   </div>
+
+  <div class="clearfix"></div>
 
   <script>
   document.addEventListener('DOMContentLoaded', function() {
