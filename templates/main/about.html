@@ -1,0 +1,53 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+{% load static %}
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+}
+
+.content {
+    flex: 1;
+    margin-right: 50px;
+}
+
+.illustration img {
+    max-width: 100%;
+    height: auto;
+}
+
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h1>About Us</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non diam at dolor sodales maximus. Sed in ligula nec eros hendrerit vehicula. Mauris id felis vitae eros varius mattis. Duis auctor arcu sit amet ligula fermentum, id facilisis lectus vestibulum. Nulla facilisi.</p>
+            <p>Nulla facilisi. Sed ut nunc ligula. Vestibulum non feugiat eros, sit amet rutrum ipsum. Nullam eget nunc a elit consequat dictum. Cras a elit non dui tristique consequat. Nam sit amet consequat turpis. Phasellus vel magna eget lectus fringilla vulputate non sit amet dolor.</p>
+        </div>
+        <div class="illustration">
+            <!-- Insert your illustration here -->
+            <img src="./images.about.png" alt="Illustration">
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

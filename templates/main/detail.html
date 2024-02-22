@@ -1,16 +1,21 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Detail</title>
-    <link rel="stylesheet" href={% static 'styles.css' %}"> <!-- Include your CSS file -->
+    <!-- <link rel="stylesheet" href={% static 'style.css' %}"> Include your CSS file -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Include your CSS file -->
 </head>
 <body>
     <div class="product-detail-container">
         <div class="product-image">
             <!-- Image of the product -->
-            <img src="/path/to/product-image.jpg" alt="Product Image">
+            <img src="{% static '%}" alt="Product Image">  ..........
         </div>
         <div class="product-description">
             <!-- Description of the product -->
@@ -43,3 +48,4 @@
     </div>
 </body>
 </html>
+{% endblock %}

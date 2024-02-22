@@ -4,126 +4,58 @@
 
 {% load static %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
-
-<div class="slider">
-    <div class="slide-wrapper">
-        <div class="slide"><img src="{% static 'images/a.jpeg' %}" alt="Slide 1"></div>
-        <div class="slide"><img src="{% static 'images/b.jpeg' %}" alt="Slide 2"></div>
-        <div class="slide"><img src="{% static 'images/c.jpeg' %}" alt="Slide 3"></div>
+    <div class="featured-products">
+        <h2 style="text-align: center;">Featured Products</h2>
+        <img src="{% static 'images/featured-image.png' %}" alt="Featured Image" class="featured-image">
     </div>
-</div>
-
-  <button class="prev">&#10094;</button>
-  <button class="next">&#10095;</button>
-</div>
-
-<div class="latest-products pt-5 pb-0">
-  <div class="container-xl">
-    <div class="section-tile row">
-      <div class="col-md-10 text-center mx-auto">
-        <h2 style="font-family: 'Arial', sans-serif; color: #333;">Recently added</h2>
-        <!-- Updated font and color -->
-        <div></div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="row flex-row">
-        {% for prod in products %}
-        <div class="col-lg-4 col-md-6 mb-4 product-card" data-category="{{ prod.category.id }}">
-          <div class="bg-white p-2 shadow-md">
-            <div class="text-center">
-              <a href="detail.html">
-                <img src="/{{ prod.image }}" alt="" class="product-image">
-              </a>
-            </div>
-            <div class="detail p-2 product-detail">
-              <h4>{{ prod.name | truncatechars:10 }}</h4>
-              <h4>Rs {{ prod.price }}</h4>
-              <!-- Added "Rs" prefix -->
-
-              <div class="row pt-2">
-                <div class="col-md-6">
-                  <form action="{% url 'cart' %}" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="product_id" value="{{ product.id }}">
-                    <button type="submit" class="btn mb-2 fw-bold w-100 btn-danger">View your cart</button>
-                  </form>
+       <div class="container">
+            <div class="row flex-row"> <!-- Changed class to flex-row -->
+                {% for prod in products %}
+                <div class="col-lg-4 col-md-6 mb-4 product-card" data-category="{{ prod.category.id }}">
+                    <div class="bg-white p-2 shadow-md">
+                        <div class="text-center">
+                            <a href="detail.html">
+                                <img src="/{{ prod.image }}" alt="" class="product-image">
+                            </a>
+                        </div>
+                        <div class="detail p-2 product-detail">
+                            <h4>{{ prod.name | truncatechars:10 }}</h4>
+                            <h4>Rs {{ prod.price }}</h4> <!-- Added "Rs" prefix -->
+                            
+                            
+                            <div class="row pt-2">
+      <div class="col-md-6">
+        <form action="{% url 'cart' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+            <button type="submit" class="btn mb-2 fw-bold w-100 btn-danger">View your cart </button>
+        </form>
+          </div>                           
+                                <div class="col-md-6">
+                                    <form class="add-to-cart-form" data-product-id="{{ prod.id }}">
+                                        {% csrf_token %}
+                                        <button type="button" class="add-to-cart btn fw-bold w-100 btn-outline-danger">Wishlist</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                  <form class="add-to-cart-form" data-product-id="{{ prod.id }}">
-                    {% csrf_token %}
-                    <button type="button" class="add-to-cart btn fw-bold w-100 btn-outline-danger">Wishlist</button>
-                  </form>
-                </div>
-              </div>
+                {% endfor %}
             </div>
-          </div>
         </div>
-        {% endfor %}
-      </div>
     </div>
-  </div>
-  <div class="clearfix"></div>
+    <div class="clearfix"></div>
 </div>
 
 <style>
-  .slider-container {
-    width: 300px;
-    margin: 50px auto;
-    position: relative;
-  }
-
-  .slider {
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .slide-wrapper {
-    display: flex;
-    transition: transform 0.5s ease;
-  }
-
-  .slide {
-    flex: 0 0 100%;
-  }
-
-  img {
-    width: 100%;
-    display: block;
-  }
-
-  .prev,
-  .next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    padding: 10px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    outline: none;
-    z-index: 1;
-  }
-
-  .prev {
-    left: 0;
-  }
-
-  .next {
-    right: 0;
-  }
-
-  .filter-btn-group {
+   .filter-btn-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
-    /* Adjust as needed */
-  }
+    gap: 5px; /* Adjust as needed */
+}
 
-  .filter-btn {
+.filter-btn {
     padding: 8px 15px;
     background-color: #007bff;
     color: #fff;
@@ -131,81 +63,91 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
+}
 
-  .filter-btn:hover {
+.filter-btn:hover {
     background-color: #0056b3;
-  }
+}
 
-  .flex-row {
+.flex-row {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    /* or any other alignment you prefer */
-  }
+    justify-content: space-between; /* or any other alignment you prefer */
+}
 
-  .product-card {
-    flex: 0 0 calc(30% - 30px);
-    /* Adjust as needed */
-    margin-bottom: 20px;
-    /* Adjust as needed */
-  }
+.product-card {
+    flex: 0 0 calc(30% - 30px); /* Adjust as needed */
+    margin-bottom: 20px; /* Adjust as needed */
+}
 
-  .product-image {
-    width: 90%;
-    /* Ensure the image doesn't exceed the container width */
-    max-height: 150px;
-    /* Allow the height to adjust dynamically based on the image's aspect ratio */
-    object-fit: contain;
-    /* Fit the entire image within the container, maintaining aspect ratio */
-    margin-bottom: 10px;
-    /* Add some bottom margin */
-  }
+.product-image {
+    width: 90%; /* Ensure the image doesn't exceed the container width */
+    max-height: 150px; /* Allow the height to adjust dynamically based on the image's aspect ratio */
+    object-fit: contain; /* Fit the entire image within the container, maintaining aspect ratio */
+    margin-bottom: 10px; /* Add some bottom margin */
+}
+.featured-products {
+    text-align: center; /* Center justify the content */
+    padding: 50px; /* Add padding for spacing */
+}
+
+.featured-products p {
+    max-width: 600px; /* Limit the width of the text */
+    margin: 0 auto 20px; /* Center the text and add space below */
+}
+
+.featured-image {
+    display: block; /* Ensure the image is a block element */
+    margin: 0 auto; /* Center the image */
+    max-width: 100%; /* Make sure the image doesn't exceed its container */
+    width: 100px;
+    height: auto;
+}
+
 
 </style>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-  $(document).ready(function() {
-    $('.add-to-cart').click(function(e) {
-      e.preventDefault();
-      var productId = $(this).closest('.add-to-cart-form').data('product-id');
-
-      $.ajax({
-        type: 'POST',
-        url: '/cart/add/' + productId + '/',
-        dataType: 'json',
-        beforeSend: function(xhr, settings) {
-          var csrftoken = getCookie('csrftoken');
-          xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        },
-        success: function(data) {
-          console.log('Item added to cart successfully');
-          // Optionally, update the cart count or show a success message
-        },
-        error: function(xhr, textStatus, errorThrown) {
-          console.error('Error adding item to cart:', errorThrown);
-          // Handle errors if any
+    $(document).ready(function() {
+        $('.add-to-cart').click(function(e) {
+            e.preventDefault();
+            var productId = $(this).closest('.add-to-cart-form').data('product-id');
+            
+            $.ajax({
+                type: 'POST',
+                url: '/cart/add/' + productId + '/',
+                dataType: 'json',
+                beforeSend: function(xhr, settings) {
+                    var csrftoken = getCookie('csrftoken');
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                },
+                success: function(data) {
+                    console.log('Item added to cart successfully');
+                    // Optionally, update the cart count or show a success message
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.error('Error adding item to cart:', errorThrown);
+                    // Handle errors if any
+                }
+            });
+        });
+        
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
         }
-      });
     });
-
-    function getCookie(name) {
-      var cookieValue = null;
-      if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-          var cookie = cookies[i].trim();
-          // Does this cookie string begin with the name we want?
-          if (cookie.substring(0, name.length + 1) === (name + '=')) {
-            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-            break;
-          }
-        }
-      }
-      return cookieValue;
-    }
-  });
 </script>
 
 {% endblock %}

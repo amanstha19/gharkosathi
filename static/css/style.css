@@ -137,74 +137,53 @@ header {
   color: black;
 }
 
-.nav2 {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  text-align: center;
-  flex-wrap: wrap;
-  background-color: #8399ee;
-  padding: 10px 20px;
-  align-items: center;
-}
-
-.nav2 .nav2-left {
-  width: 100%;
-  flex-basis: auto;
-  margin-bottom: 10px;
-}
-
-.nav2 .nav2-left h1 {
-  color: #fff;
-  font-weight: bold;
-  letter-spacing: 2px;
-  margin: 0;
-}
-
-.nav2 .nav2-left h1 span {
-  color: var(--secondary);
-  font-weight: bold;
-  letter-spacing: 2px;
-}
-
-.nav2 .between {
-  display: flex;
-  width: 100%;
-  align-items: center;
-}
-
-.nav2 .between input {
-  flex-grow: 1;
-  padding: 10px;
+.auth-buttons {
   margin-right: 10px;
-  border: none;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  font-size: 16px;
 }
 
-.nav2 .between button {
-  flex-shrink: 0;
-  padding: 10px;
-  border: none;
-  border-radius: 0 5px 5px 0;
-  cursor: pointer;
-  background-color: #555;
+.auth-button {
+  padding: 8px 12px;
+  background-color: #007bff;
   color: #fff;
-  font-size: 16px;
-}
-
-.nav2 .nav2-right {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.nav2 .nav2-right i {
-  font-size: 20px;
-  margin-left: 20px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
+  text-decoration: none;
+}
+
+.auth-button:hover {
+  background-color: #0056b3;
+}
+
+.logout-button {
+  padding: 8px 12px;
+  background-color: #dc3545;
   color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.logout-button:hover {
+  background-color: #c82333;
+}
+
+.nav2-center ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav2-center ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+.nav2-center ul li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
 }
 
 .nav3 {
@@ -622,3 +601,30 @@ header {
   max-width: 100px; /* Adjust thumbnail size as needed */
   height: auto;
 }
+/* .......... */
+/* CSS for the login/register button */
+.auth-button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.auth-button:hover {
+  background-color: #0056b3;
+}
+
+/* CSS for the cart button */
+.cart-button {
+  padding: 8px 16px;
+  background-color: #28a745;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.cart-button:hover {
+  background-color: #218838;
+}
+
