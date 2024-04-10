@@ -65,7 +65,7 @@ def register(request):
         pass1 = request.POST.get('pass1')
         pass2 = request.POST.get('pass2')
 
-        # Check if email already exists
+
         if User.objects.filter(email=email).exists():
             return render(request, 'register/auth.html', {'error_message': 'Email address is already in use'})
 
@@ -73,7 +73,7 @@ def register(request):
         if pass1 != pass2:
             return render(request, 'register/auth.html', {'error_message': 'Passwords do not match'})
 
-        # Set a default username if not provided
+        # Set a default yedi not provided
         if not username:
             username = email.split('@')[0]
 
@@ -211,14 +211,13 @@ def userprofile(request):
 def checkout(request):
     if request.method == "POST":
         try:
-            # Retrieve form data
-            # Your existing code here...
 
-            # Calculate total price from items in the cart
+
+
             cart_items = Cart.objects.filter(user=request.user)
             total_price = sum(item.product.price * item.quantity for item in cart_items)
 
-            # Your existing code here...
+
 
             # Render the checkout page with a thank you message, order ID, and total price
             return render(request, 'register/success.html', {'thank': True, 'id': order.id, 'total_price': total_price})
@@ -257,3 +256,10 @@ def remove_from_cart(request, product_id):
         product = Product.objects.get(id=product_id)  # Assuming you have a Product model
         cart.remove(product)
         return render(request, 'cart/cart_detail.html', {'cart': cart})
+
+
+def about(request):
+    return render(request, 'main/about.html')
+
+
+

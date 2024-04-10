@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
        /* Common styles */
@@ -70,7 +71,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px; /* Increase the padding for height */
-    background-color: #a6adcc;
+    background-color: #8399ee;
 }
 /* Adjusted CSS for navbar height */
 .nav2 {
@@ -78,7 +79,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 30px 20px; /* Increased padding for height */
-    background-color: #a6adcc;
+    background-color: #8399ee;
 }
 
 /* Common styles for the search bar and button */
@@ -139,6 +140,7 @@
     <button type="submit" style="padding: 10px; background-color: #007bff; color: #fff; border: none; border-radius: 0 20px 20px 0; cursor: pointer;">
         <i class="fa fa-search" style="font-size: 16px;"></i>
     </button>
+    </button>
 </form>
 
             
@@ -159,7 +161,7 @@
                 <li><a href="{% url 'index' %}"><i class="fa fa-home"></i>Home </a></li>
                 <li><a href="{% url 'product' %}"><i class=""></i> Categories</a></li>
                 <li><a href="{% url 'help' %}"><i class=""></i>Help</a></li>
-                <li><a href=""><i class=""></i>About us </a></li>
+                <li><a href="{% url 'about' %}"><i class=""></i>About us </a></li>
                 <li><a href="{% url 'userprofile' %}"><i class=""></i> My profile</a></li>
             </ul>
         </nav>

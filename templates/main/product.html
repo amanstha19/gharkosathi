@@ -58,8 +58,7 @@
         <a href="{% url 'cart' %}" class="cart-button" style="text-decoration: none;">
             <i class="fa fa-shopping-cart"></i> View Cart
         </a>
-        <i class="fa fa-phone"></i>+977 9840259838
-        <i class="fa fa-envelope"></i>upahar@gmail.com
+
     </div>
 </nav>
 
@@ -72,18 +71,12 @@
 
         <!-- naya nav suru hunxa yaha bata -->
 <nav class="nav3">
-            <ul>
+      <ul>
                 <li><a href="{% url 'index' %}"><i class="fa fa-home"></i>Home </a></li>
-                <li>
-                    <a href="{% url 'product' %}"><i class="fa fa-male"></i> Categories</a>
-                  
-                </li>
-                <li><a href=""><i class=""></i>Help</a></li>
-                <li><a href=""><i class=""></i>About us </a></li>
-                
-               
-          
-
+                <li><a href="{% url 'product' %}"><i class=""></i> Categories</a></li>
+                <li><a href="{% url 'help' %}"><i class=""></i>Help</a></li>
+                <li><a href="{% url 'about' %}"><i class=""></i>About us </a></li>
+                <li><a href="{% url 'userprofile' %}"><i class=""></i> My profile</a></li>
             </ul>
         </nav>
 
@@ -135,7 +128,7 @@
         <form action="{% url 'checkout' %}" method="post">
             {% csrf_token %}
             <input type="hidden" name="product_id" value="{{ product.id }}">
-            <button type="submit" class="btn mb-2 fw-bold w-100 btn-danger">Buy Now</button>
+      
         </form>
           </div>
                                 <div class="col-md-6">
