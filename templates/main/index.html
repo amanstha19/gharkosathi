@@ -3,15 +3,36 @@
 {% block content %}
 {% load static %}
 
+<!-- HTML for Filter Options -->
+<div class="filter-container">
+    <label for="category-filter">Filter by Category:</label>
+    <select id="category-filter">
+        <option value="">All Categories</option>
+        <option value="electronics">Electronics</option>
+        <option value="clothing">Clothing</option>
+        <option value="home">Home & Kitchen</option>
+        <!-- Add more categories as needed -->
+    </select>
+
+    <label for="price-filter">Price Range:</label>
+    <input type="number" id="min-price" placeholder="Min Price">
+    <input type="number" id="max-price" placeholder="Max Price">
+
+    <button id="apply-filter">Apply Filter</button>
+</div>
+ 
   <div class="slider-container">
     <div class="slider">
-        <img src="{% static 'images/d.jpeg' %}" alt="">
-        <img src="{% static 'images/a.jpeg' %}" alt="">
+        <img src="{% static 'images/sss.jpeg' %}" alt="">
+        <img src="{% static 'images/img.jpg' %}" alt="">
     </div>
     <button class="prev-slide">Prev</button>
     <button class="next-slide">Next</button>
 </div>
 
+<div class="clearfix"></div>
+
+   <h3> Just For you</h3>
 <div class="container">
     <div class="row flex-row"> <!-- Changed class to flex-row -->
         {% for prod in products %}
@@ -53,26 +74,79 @@
 
 <style>
      /* Your CSS styles here */
+     
+     
+ .filter-container {
+    float: left; /* Align to the left side */
+    margin-right: 10px; /* Adjust margin for spacing */
+    margin-left: 50px;
+}
+
+.filter-container label,
+.filter-container select,
+.filter-container input[type="number"],
+.filter-container button {
+    display: block; /* Each element on a new line */
+    margin-bottom: 10px; /* Add vertical spacing */
+    font-size: 20px; /* Match font size with navbar */
+    color: #555; /* Adjust text color */
+    font-family: Arial, sans-serif;
+}
+
+.filter-container button {
+    padding: 8px 16px; /* Match padding with navbar buttons */
+    background-color: #4CAF50; /* Green, match with auth-button */
+    color: #fff; /* Button text color */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Match border-radius with navbar buttons */
+    cursor: pointer; /* Change cursor to pointer */
+    transition: background-color 0.3s ease; /* Add transition effect */
+}
+
+.filter-container button:hover {
+    background-color: #45a049; /* Darker Green, match with auth-button:hover */
+}
+
     .slider-container {
+    
+    
+       margin-top:15px;
+       margin-bottom:30px;
+       margin-right: 15px;
+       
+       float: right;
         position: relative; /* Ensure the buttons are positioned relative to the container */
-        width: 100%; /* Adjust width as needed */
+        width: 70%; /* Adjust width as needed */
+    
+       
         overflow: hidden;
+   
     }
 
     .slider {
+        position: relative;
         display: flex;
+        height:300px;
         width: 200%; /* Set to 200% to accommodate two images */
+        transform: translateX(-50px); /* Shift the content 50 pixels to the left */
+       transition: transform 0.3s ease;
     }
+    
 
     .slider img {
+        object-fit: cover;
         width: 50%; /* Ensure images take half the width of slider */
         height: auto; /* Maintain aspect ratio */
     }
-
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
     .prev-slide,
     .next-slide {
         position: absolute; /* Position buttons absolutely */
-        top: 50%; /* Align buttons vertically in the middle */
+        top: 90%; /* Align buttons vertically in the middle */
         transform: translateY(-50%); /* Center vertically */
         background-color: #007bff; /* Button background color */
         color: #fff; /* Button text color */
@@ -164,6 +238,33 @@
 </style>
 
 <script>
+    
+     $(document).ready(function() {
+    $('#apply-filter').click(function() {
+        var category = $('#category-filter').val();
+        var minPrice = $('#min-price').val();
+        var maxPrice = $('#max-price').val();
+        
+        // Send AJAX request to the server with filter parameters
+        $.ajax({
+            url: '/products/filter/',
+            type: 'GET',
+            data: {
+                category: category,
+                minPrice: minPrice,
+                maxPrice: maxPrice
+            },
+            success: function(data) {
+                // Update the product list with filtered results
+                $('#product-list').html(data);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.error('Error applying filter:', errorThrown);
+            }
+        });
+    });
+});
+
     $(document).ready(function() {
         $('.add-to-cart').click(function(e) {
             e.preventDefault();

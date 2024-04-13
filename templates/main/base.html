@@ -78,27 +78,33 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 20px; /* Increased padding for height */
+    padding: 8px 10px; /* Increased padding for height */
     background-color: #8399ee;
 }
 
 /* Common styles for the search bar and button */
-#search {
-    padding: 10px;
-    font-size: 16px;
-    color: #000;
-    border-radius: 20px;
-    border: 1px solid #ccc;
+.search-form {
+    display: flex;
 }
 
-.nav2-right button[type="submit"] {
+.search-form input[type="text"] {
+    padding: 10px 200px; /* Adjust the padding as needed */
+    font-size: 16px;
+    color: #000;
+    min-width: 300px; /* Adjust the minimum width as needed */
+    width: calc(100% - 40px); /* Set width to fill available space, considering padding */
+    border-radius: 20px 0 0 20px;
+    border: 1px solid #ccc;
+}
+.search-form button[type="submit"] {
     padding: 10px 20px;
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 20px;
+    border-radius: 0 20px 20px 0;
     cursor: pointer;
 }
+
 
 .nav2-right button[type="submit"]:hover {
     background-color: #0056b3; /* Darker Blue */
@@ -134,15 +140,15 @@
                     <p class="tagline">Making gifts-giving a breeze!</p>
                 </div>
             </div>
-            
-            <form action="/search/" method="get" style="display: flex; align-items: center;">
-    <input type="text" placeholder="Search..." name="search" id="search" style="padding: 10px; font-size: 16px; color: #000; flex: 1; border-radius: 20px 0 0 20px; border: 1px solid #ccc;">
-    <button type="submit" style="padding: 10px; background-color: #007bff; color: #fff; border: none; border-radius: 0 20px 20px 0; cursor: pointer;">
-        <i class="fa fa-search" style="font-size: 16px;"></i>
-    </button>
-    </button>
-</form>
+<form action="/search/" method="get" class="search-form">
+        <input type="text" placeholder="Search..." name="search" id="search">
+        <button type="submit">
+            <i class="fa fa-search"></i>
+        </button>
+    </form>
 
+         
+         
             
             <div class="nav2-right">
                 {% if user.is_authenticated %}
