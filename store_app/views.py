@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from cart.cart import Cart
-from store_app.models import Order, Delivery, Wishlist,OrderItem
+from store_app.models import Order, Delivery, Wishlist, OrderItem
 from django.contrib.auth import login
 from django.http import HttpResponse
 

@@ -49,9 +49,14 @@ class Product(models.Model):
             self.unique_id = self.added_date.strftime('75%Y%m%d23') + str(self.id)
             super().save(*args, **kwargs)
 
+    def __str__(self):
+        return self.name
+
 class images(models.Model):
     image = models.ImageField(upload_to='Product_images/img')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.image
 
 class tag(models.Model):
     name = models.CharField(max_length=200)
