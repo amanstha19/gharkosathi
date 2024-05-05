@@ -1,5 +1,4 @@
-from django.views import View
-from django.contrib import admin
+
 from django.urls import path, include
 from . import views
 from django.conf import settings
@@ -7,8 +6,7 @@ from django.conf.urls.static import static
 from .views import AuthView
 from .views import item_clear
 
-from cart.cart import Cart
-import json
+
 
 
 
@@ -42,7 +40,6 @@ urlpatterns = [
 
     path('detail/', views.detail_page, name='detail'),
     path('about/', views.about_page, name='about'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

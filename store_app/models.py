@@ -93,9 +93,9 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     firstname = models.CharField(max_length=100, default='')
     lastname = models.CharField(max_length=100,default='')
-    address = models.TextField(max_length=100, default='x')
+    address = models.TextField(max_length=100, null=True, blank=True)
 
-    city = models.CharField(max_length=100,default='')
+    city = models.CharField(max_length=100, null=True, blank=True)
     phone = models.IntegerField(default='0')
 
     email = models.EmailField(max_length=100,default='')

@@ -244,7 +244,7 @@ def update_total_price(request):
 
 
 def place_order(request):
-    # Logic to handle placing an order
+
     return HttpResponse("Order placed successfully")
 
 from django.shortcuts import render
