@@ -103,12 +103,14 @@ def help_page(request):
     return render(request, 'main/help.html')
 
 
+def detail_page(request):
+    return render(request, 'main/detail.html')
+
+
 def user_logout(request):
     logout(request)
     return redirect('home')
 
-def detail_page(request):
-    return render(request, 'main/detail.html')
 
 def about_page(request):
     return render(request, 'main/about.html')
